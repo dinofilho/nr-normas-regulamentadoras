@@ -3,48 +3,27 @@
 <title>Quiz – Avaliação Teórica</title>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head><body class="bg-gray-50 text-gray-900">
-<header class="bg-blue-900 text-white p-4">
-  <div class="max-w-4xl mx-auto flex justify-between">
-    <a href="index.html" class="font-bold">NR NORMAS REGULAMENTADORAS</a>
-    <span id="cursoTag"></span>
-  </div>
-</header>
-
+<header class="bg-blue-900 text-white p-4"><div class="max-w-4xl mx-auto flex justify-between">
+  <a href="index.html" class="font-bold">NR NORMAS REGULAMENTADORAS</a><span id="cursoTag"></span>
+</div></header>
 <main class="max-w-4xl mx-auto p-6">
   <h1 class="text-2xl font-bold mb-4">Avaliação Teórica</h1>
 
   <!-- Identificação -->
-  <div class="grid md:grid-cols-3 gap-4 mb-4">
+  <div class="grid md:grid-cols-3 gap-4 mb-6">
     <input id="aluno" class="border p-2 rounded" placeholder="Nome completo">
     <input id="cpf"   class="border p-2 rounded" placeholder="CPF (000.000.000-00)">
-    <input id="email" class="border p-2 rounded" placeholder="Seu e-mail">
+    <input id="email" class="border p-2 rounded" placeholder="(opcional) e-mail">
   </div>
 
-  <!-- Gate de liberação -->
-  <div class="p-4 border rounded mb-6">
-    <p class="mb-2">Para iniciar a avaliação, digite seu <strong>CPF</strong> e clique em <strong>Verificar liberação</strong>.</p>
-    <div class="flex gap-3 items-center">
-      <button id="btnCheck" class="bg-indigo-700 text-white px-4 py-2 rounded">Verificar liberação</button>
-      <span id="statusLib" class="text-sm"></span>
-    </div>
-  </div>
-
-  <!-- Área do Quiz (preenchida após liberação) -->
-  <form id="quizForm" class="space-y-6 hidden"></form>
+  <form id="quizForm" class="space-y-6"></form>
 
   <div class="flex items-center gap-3 mt-6">
-    <button id="btnEnviar" class="bg-blue-700 text-white px-5 py-3 rounded-xl hidden">Enviar respostas</button>
-    <button id="btnEmail"  class="bg-emerald-600 text-white px-5 py-3 rounded-xl hidden">Enviar para meu e-mail</button>
-    <a id="btnCert" href="certificado.html" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hidden">Gerar Certificado (PDF)</a>
+    <button id="btnEnviar" class="bg-blue-700 text-white px-5 py-3 rounded-xl">Enviar respostas</button>
+    <a id="btnComprovante" href="comprovante.html" class="bg-green-600 text-white px-4 py-2 rounded hidden">Baixar Comprovante (PDF)</a>
   </div>
 
   <p id="resultado" class="mt-6 text-lg font-semibold"></p>
-  <p id="msgEmail" class="mt-2 text-sm"></p>
-
-  <!-- Endpoint Formspree do Dino -->
-  <script>const FORM_ENDPOINT="https://formspree.io/f/mldpzjra";</script>
 </main>
-
-<script src="assets/js/hashlib.js"></script>
 <script src="assets/js/quiz.js"></script>
 </body></html>

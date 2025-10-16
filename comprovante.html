@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comprovante de Avaliação</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head><body class="bg-gray-100 text-gray-900">
+<main class="max-w-3xl mx-auto p-6">
+  <div class="bg-white p-8 shadow rounded-xl">
+    <h1 class="text-2xl font-bold text-center mb-6">COMPROVANTE DE AVALIAÇÃO (TEORIA – EAD)</h1>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div><label class="text-sm">Aluno</label><input id="aluno" class="border p-2 rounded w-full" placeholder="Nome completo"></div>
+      <div><label class="text-sm">CPF</label><input id="cpf" class="border p-2 rounded w-full" placeholder="000.000.000-00"></div>
+      <div><label class="text-sm">Cidade</label><input id="cidade" class="border p-2 rounded w-full" placeholder="Cidade"></div>
+      <div><label class="text-sm">Estado (UF)</label>
+        <select id="uf" class="border p-2 rounded w-full">
+          <option value="">Selecionar</option>
+          <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+          <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+          <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+          <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+          <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+          <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+          <option>SP</option><option>SE</option><option>TO</option>
+        </select>
+      </div>
+      <div><label class="text-sm">Curso / NR</label><input id="curso" class="border p-2 rounded w-full" disabled></div>
+      <div><label class="text-sm">Nota</label><input id="nota" class="border p-2 rounded w-full" disabled></div>
+      <div><label class="text-sm">Data da avaliação</label><input id="data" class="border p-2 rounded w-full" disabled></div>
+    </div>
+    <p class="text-xs text-gray-600 mt-4">
+      Observação: Quando houver parte PRÁTICA obrigatória, o registro da prática (data/local/instrutor) deve ser feito em documento próprio.
+    </p>
+    <div class="mt-6">
+      <button id="btnPDF" class="bg-blue-700 text-white px-4 py-2 rounded">Baixar Comprovante (PDF)</button>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="assets/js/comprovante.js"></script>
+</body></html>
