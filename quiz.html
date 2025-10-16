@@ -9,11 +9,18 @@
 <main class="max-w-4xl mx-auto p-6">
   <h1 class="text-2xl font-bold mb-4">Avaliação Teórica</h1>
   <form id="quizForm" class="space-y-6"></form>
-  <button id="btnEnviar" class="mt-6 bg-blue-700 text-white px-5 py-3 rounded-xl">Enviar respostas</button>
-  <p id="resultado" class="mt-6 text-lg font-semibold"></p>
-  <div id="certBlock" class="mt-4 hidden">
-    <a href="certificado.html" class="bg-green-600 text-white px-4 py-2 rounded">Gerar Certificado</a>
+
+  <div class="flex items-center gap-3 mt-6">
+    <button id="btnEnviar" class="bg-blue-700 text-white px-5 py-3 rounded-xl">Enviar respostas</button>
+    <button id="btnEmail"  class="bg-emerald-600 text-white px-5 py-3 rounded-xl hidden">Enviar para meu e-mail</button>
+    <a id="btnCert" href="certificado.html" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hidden">Gerar Certificado (PDF)</a>
   </div>
+
+  <p id="resultado" class="mt-6 text-lg font-semibold"></p>
+  <p id="msgEmail" class="mt-2 text-sm"></p>
+
+  <!-- Configurar seu endpoint do Formspree aqui: -->
+  <script>const FORM_ENDPOINT = "COLE_AQUI_SEU_ENDPOINT_DO_FORMSPREE";</script><script>const FORM_ENDPOINT="https://formspree.io/f/mldpzjra";</script>
 </main>
 <script src="assets/js/quiz.js"></script>
 </body></html>
