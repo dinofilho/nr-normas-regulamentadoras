@@ -11,9 +11,6 @@
   const params = new URLSearchParams(location.search);
   const curso = (params.get("curso")||"nr1").toLowerCase();
   const cursoNome = nomes[curso] || curso.toUpperCase();
-  document.getElementById("cursoTag").textContent = cursoNome;
-
-  const arquivo = `assets/questions/${curso}.json`;
   const form = document.getElementById("quizForm");
   const btnEnviar = document.getElementById("btnEnviar");
   const btnComp  = document.getElementById("btnComprovante");
@@ -21,10 +18,23 @@
   const fldNome = document.getElementById("aluno");
   const fldCPF  = document.getElementById("cpf");
 
-  // monta questões
-  fetch(arquivo).then(r=>r.json()).then(qs=>{
-    const perguntasSel = qs.sort(()=>Math.random()-0.5).slice(0,10);
-    perguntasSel.forEach((item,idx)=>{
+  const tag = document.getElementById("cursoTag");
+  if(tag) tag.textContent = cursoNome;
+
+  const arquivo = `assets/questions/${curso}.json`;
+
+  fetch(arquivo).then(r=>{
+    if(!r.ok) throw new Error("Arquivo de questões não encontrado");
+    return r.json();
+  }).then(qs=>{
+    const perguntasSel = qs.slice(0); // copia
+    // garante pelo menos 10
+    while(perguntasSel.length<10 && qs.length>0){ perguntasSel.push(qs[perguntasSel.length%qs.length]); }
+    // embaralha e corta em 10
+    perguntasSel.sort(()=>Math.random()-0.5);
+    const chosen = perguntasSel.slice(0,10);
+
+    chosen.forEach((item,idx)=>{
       const b = document.createElement("div");
       b.className="p-4 border rounded";
       b.innerHTML = `<p class="font-semibold mb-2">${idx+1}. ${item.q}</p>`+
@@ -35,24 +45,26 @@
     btnEnviar.onclick = (e)=>{
       e.preventDefault();
       let acertos=0, resp=0;
-      perguntasSel.forEach((it,idx)=>{
+      chosen.forEach((it,idx)=>{
         const v=(new FormData(form)).get("q"+idx);
         if(v!==null){resp++; if(+v===it.c) acertos++;}
       });
-      const nota = Math.round((acertos/perguntasSel.length)*100);
-      const ok = nota>=70 && resp===perguntasSel.length;
-      resultado.textContent = `Acertos: ${acertos}/${perguntasSel.length} — Nota: ${nota}% ${ok?"(APROVADO)":"(REPROVADO)"}${resp<perguntasSel.length?" — Responda todas as questões.":""}`;
+      const nota = Math.round((acertos/chosen.length)*100);
+      const ok = nota>=70 && resp===chosen.length;
+      resultado.textContent = `Acertos: ${acertos}/${chosen.length} — Nota: ${nota}% ${ok?"(APROVADO)":"(REPROVADO)"}${resp<chosen.length?" — Responda todas as questões.":""}`;
 
       if(ok){
-        // salva dados para o comprovante
         localStorage.setItem("cert_dados", JSON.stringify({
           curso: cursoNome, cod: curso, nota, data: new Date().toISOString(),
-          aluno: fldNome.value||"", cpf: fldCPF.value||""
+          aluno: (fldNome.value||""), cpf: (fldCPF.value||"")
         }));
         btnComp.classList.remove("hidden");
       } else {
         btnComp.classList.add("hidden");
       }
     };
-  }).catch(()=>{ resultado.textContent="Banco de questões não encontrado."; });
+  }).catch(err=>{
+    resultado.className="mt-6 text-lg font-semibold text-red-600";
+    resultado.textContent = "Não foi possível carregar as questões deste curso ("+err.message+").";
+  });
 })();
