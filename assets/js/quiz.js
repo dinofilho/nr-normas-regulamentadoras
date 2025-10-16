@@ -11,15 +11,14 @@
   const params = new URLSearchParams(location.search);
   const curso = (params.get("curso")||"nr1").toLowerCase();
   const cursoNome = nomes[curso] || curso.toUpperCase();
+
   const form = document.getElementById("quizForm");
   const btnEnviar = document.getElementById("btnEnviar");
   const btnComp  = document.getElementById("btnComprovante");
   const resultado = document.getElementById("resultado");
   const fldNome = document.getElementById("aluno");
   const fldCPF  = document.getElementById("cpf");
-
-  const tag = document.getElementById("cursoTag");
-  if(tag) tag.textContent = cursoNome;
+  const tag = document.getElementById("cursoTag"); if(tag) tag.textContent = cursoNome;
 
   const arquivo = `assets/questions/${curso}.json`;
 
@@ -27,13 +26,20 @@
     if(!r.ok) throw new Error("Arquivo de questões não encontrado");
     return r.json();
   }).then(qs=>{
-    const perguntasSel = qs.slice(0); // copia
-    // garante pelo menos 10
-    while(perguntasSel.length<10 && qs.length>0){ perguntasSel.push(qs[perguntasSel.length%qs.length]); }
-    // embaralha e corta em 10
-    perguntasSel.sort(()=>Math.random()-0.5);
-    const chosen = perguntasSel.slice(0,10);
+    // 1) remove duplicadas por texto (q)
+    const vistos = new Set();
+    const uniq = [];
+    for (const it of qs) {
+      if (it && typeof it.q === "string" && !vistos.has(it.q.trim())) {
+        vistos.add(it.q.trim());
+        uniq.push(it);
+      }
+    }
+    // 2) embaralha e pega até 10 sem repetir
+    uniq.sort(()=>Math.random()-0.5);
+    const chosen = uniq.slice(0, Math.min(10, uniq.length));
 
+    // 3) monta o formulário
     chosen.forEach((item,idx)=>{
       const b = document.createElement("div");
       b.className="p-4 border rounded";
@@ -56,11 +62,11 @@
       if(ok){
         localStorage.setItem("cert_dados", JSON.stringify({
           curso: cursoNome, cod: curso, nota, data: new Date().toISOString(),
-          aluno: (fldNome.value||""), cpf: (fldCPF.value||"")
+          aluno: (fldNome?.value||""), cpf: (fldCPF?.value||"")
         }));
-        btnComp.classList.remove("hidden");
+        btnComp?.classList.remove("hidden");
       } else {
-        btnComp.classList.add("hidden");
+        btnComp?.classList.add("hidden");
       }
     };
   }).catch(err=>{
