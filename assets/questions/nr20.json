@@ -1,4 +1,12 @@
 [
- {"q":"A NR-20 trata de:","a":["Eletricidade","Máquinas","Inflamáveis e combustíveis","Ergonomia"],"c":2},
- {"q":"Parte teórica pode ser EAD desde que:","a":["Não tenha prova","Siga Anexo II da NR-1","Seja por WhatsApp","Não registre presença"],"c":1}
+  {
+    "q": "A NR-20 trata de:",
+    "a": [
+      "Eletricidade",
+      "Máquinas",
+      "Inflamáveis e combustíveis",
+      "Ergonomia"
+    ],
+    "c": 2
+  }
 ]
