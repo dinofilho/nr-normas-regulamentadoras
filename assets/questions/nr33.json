@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-33 trata de:", "a":["Trabalho em altura","Espaço confinado","Eletricidade","Ergonomia"], "c":1},
+ {"q":"Documento que autoriza atividades no espaço confinado:", "a":["CAT","PET (Permissão de Entrada e Trabalho)","PPP","PTA"], "c":1},
+ {"q":"Monitoramento em espaço confinado envolve:", "a":["Apenas O2","O2, inflamáveis e tóxicos","Somente CO2","Somente CH4"], "c":1},
+ {"q":"Quem pode ser vigia:", "a":["Qualquer pessoa","Trabalhador treinado e designado","Somente supervisor","Apenas brigadista"], "c":1},
+ {"q":"Resgate deve ser:", "a":["Improvisado","Planejado e com equipamentos","Feito só pelo bombeiro","Somente com macas"], "c":1},
+ {"q":"Comunicação entre equipe:", "a":["Não é necessária","É obrigatória e contínua","Somente por celular","Somente por rádio"], "c":1},
+ {"q":"Bloqueio/etiquetagem (LOTO):", "a":["Opcional","Recomendado","Exigido quando aplicável","Proibido"], "c":2},
+ {"q":"Ventilação:", "a":["Dispensável","Somente natural","Deve garantir atmosfera segura","Apenas após o trabalho"], "c":2},
+ {"q":"Treinamentos da NR-33:", "a":["Sem reciclagem","Com reciclagem periódica","Apenas no admissional","Somente on-the-job"], "c":1},
+ {"q":"Registros:", "a":["Dispensáveis","Apenas fotos","Conservar PETs, listas e avaliações","Somente atas"], "c":2}
+]

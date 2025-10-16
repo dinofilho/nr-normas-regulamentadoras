@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificado</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head><body class="bg-gray-100 text-gray-900">
+<main class="max-w-3xl mx-auto p-6">
+  <div class="bg-white p-8 shadow rounded-xl">
+    <h1 class="text-2xl font-bold text-center mb-4">CERTIFICADO DE CONCLUSÃO (TEORIA – EAD)</h1>
+    <p class="mb-2"><strong>Aluno:</strong> <input id="aluno" class="border p-2 rounded w-full" placeholder="Nome completo"></p>
+    <p class="mb-2"><strong>CPF:</strong> <input id="cpf" class="border p-2 rounded w-full" placeholder="000.000.000-00"></p>
+    <p class="mb-2"><strong>Curso/NR:</strong> <span id="curso"></span></p>
+    <p class="mb-2"><strong>Nota (teoria):</strong> <span id="nota"></span></p>
+    <p class="mb-2"><strong>Carga horária (teórica):</strong> <input id="carga" class="border p-2 rounded w-full" placeholder="ex.: 8h"></p>
+    <p class="mb-2"><strong>Responsável técnico:</strong> <input id="rt" class="border p-2 rounded w-full" placeholder="Nome – CREA nº"></p>
+    <p class="mb-2"><strong>CNPJ/Endereço (GLOBALLED SST):</strong> <input id="cnpj" class="border p-2 rounded w-full" placeholder="CNPJ – Endereço"></p>
+    <p class="text-sm text-gray-600 mb-4">Observação: quando houver prática obrigatória, registrar data/local/instrutor no anexo.</p>
+    <div class="flex items-center gap-3">
+      <button id="btnPDF" class="bg-blue-700 text-white px-4 py-2 rounded">Gerar PDF</button>
+      <div id="qrcode" class="ml-auto"></div>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="assets/js/cert.js"></script>
+</body></html>

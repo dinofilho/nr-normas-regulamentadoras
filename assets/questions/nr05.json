@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-05 trata de:", "a":["CIPA","EPI","Eletricidade","Ergonomia"], "c":0},
+ {"q":"Missão da CIPA:", "a":["Apenas fiscalizar","Prevenir acidentes e doenças","Punir trabalhadores","Emitir CAT"], "c":1},
+ {"q":"Eleições da CIPA:", "a":["Dispensáveis","Devem seguir regras da NR-05","Por indicação","Somente anuais"], "c":1},
+ {"q":"Reuniões:", "a":["Sem atas","Com atas e pauta","Só quando há acidente","Somente on-line"], "c":1},
+ {"q":"Mapa de riscos/Inventário:", "a":["Inútil","Ferramenta de prevenção","Somente para auditoria","Apenas RH"], "c":1},
+ {"q":"Treinamento dos cipeiros:", "a":["Não precisa","Teoria pode ser EAD","Somente prática","Somente vídeo"], "c":1},
+ {"q":"Participação dos empregados:", "a":["Indiferente","Importante para prevenção","Proibida","Somente chefia"], "c":1},
+ {"q":"Integração com PGR/GRO:", "a":["Não há","É necessária","Opcional","Proibida"], "c":1},
+ {"q":"Comunicação de risco:", "a":["Dispensável","Fundamental","Somente por e-mail","Somente cartazes"], "c":1},
+ {"q":"Avaliação de eficácia:", "a":["Não existe","Acompanhar indicadores e ações","Somente auditoria externa","Somente multas"], "c":1}
+]

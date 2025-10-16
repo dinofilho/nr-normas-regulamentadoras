@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-10 trata de:", "a":["Eletricidade","Máquinas","Espaço confinado","Altura"], "c":0},
+ {"q":"Choque elétrico e arco:", "a":["Não são riscos","São riscos relevantes","Apenas baixa tensão","Somente em média tensão"], "c":1},
+ {"q":"Documento de segurança em serviços:", "a":["PPRA","PGR/Procedimentos e prontuário","PET","CAT"], "c":1},
+ {"q":"Bloqueio e etiquetagem:", "a":["Não se aplica","Somente escritório","Medida de controle essencial","Proibido"], "c":2},
+ {"q":"Trabalhos energizados exigem:", "a":["Nada especial","Autorização, procedimentos e EPI/EPC","Apenas luvas","Somente extintor"], "c":1},
+ {"q":"Treinamento teórico:", "a":["Pode ser EAD","Proibido","Somente oral","Sem avaliação"], "c":0},
+ {"q":"Prontuário de instalações:", "a":["Dispensável","Manter atualizado","Somente foto","Somente diagrama"], "c":1},
+ {"q":"Aterramento e equipotencialização:", "a":["Indiferentes","Medidas importantes","Somente estética","Proibidos"], "c":1},
+ {"q":"Primeiros socorros e combate a incêndio:", "a":["Irrelevantes","Conteúdos do curso","Somente CIPA","Somente brigada"], "c":1},
+ {"q":"Responsabilidade do empregador:", "a":["Fornecer condições seguras e capacitar","Somente punir","Ignorar terceirizados","Apenas comprar EPI"], "c":0}
+]

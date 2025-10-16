@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-35 trata de:", "a":["Máquinas","Ergonomia","Trabalho em altura","Eletricidade"], "c":2},
+ {"q":"Altura considerada pela NR-35:", "a":["> 1 m","> 1,5 m","> 2 m","> 3 m"], "c":2},
+ {"q":"Treinamento:", "a":["Somente presencial","Teoria pode ser EAD + prática presencial","Apenas EAD","Não exige"], "c":1},
+ {"q":"EPI principal:", "a":["Capacete","Cinturão paraquedista","Óculos","Luvas de vaqueta"], "c":1},
+ {"q":"Sistema de ancoragem deve:", "a":["Ser improvisado","Atender resistência e norma","Usar corda qualquer","Ser qualquer estrutura"], "c":1},
+ {"q":"Condições impeditivas:", "a":["Nunca existem","Devem interromper o trabalho","Ignorar se há prazo","Somente em chuva"], "c":1},
+ {"q":"Resgate:", "a":["Não se planeja","Planejado antes do trabalho","Chama depois se precisar","Só bombeiro decide"], "c":1},
+ {"q":"Inspeção de EPI:", "a":["Sem necessidade","Antes de usar e periodicamente","Uma vez ao ano","Só pelo fabricante"], "c":1},
+ {"q":"Documentos típicos:", "a":["PET","APR/PGR e checklist","PPP","CAT"], "c":1},
+ {"q":"Trabalhos com vento forte/chuva:", "a":["Prosseguir","A critério do trabalhador","Avaliar e interromper se inseguro","Ignorar"], "c":2}
+]

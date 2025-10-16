@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-06 trata de:", "a":["CIPA","EPI","Máquinas","Armazenagem"], "c":1},
+ {"q":"Obrigação do empregador:", "a":["Vender EPI","Fornecer EPI adequado e gratuito","Cobrar do empregado","Ignorar CA"], "c":1},
+ {"q":"Certificado de Aprovação (CA):", "a":["Não importa","Deve estar válido","Somente estético","Somente importados"], "c":1},
+ {"q":"Treinamento sobre EPI:", "a":["Dispensável","Necessário (uso, higienização, guarda)","Somente vídeo","Somente manual"], "c":1},
+ {"q":"Responsabilidade do empregado:", "a":["Não usar","Usar e conservar","Revender","Guardar em casa"], "c":1},
+ {"q":"Registro de entrega:", "a":["Desnecessário","Importante para rastreio","Somente verbal","Somente mensal"], "c":1},
+ {"q":"Integração com PGR/GRO:", "a":["Inexistente","Necessária","Proibida","Somente RH"], "c":1},
+ {"q":"Substituição de EPI danificado:", "a":["Ignorar","Imediata","Somente em auditoria","Somente anual"], "c":1},
+ {"q":"Conforto e tamanho:", "a":["Indiferente","Critérios de seleção","Proibidos","Somente P"], "c":1},
+ {"q":"EPI coletivo:", "a":["É EPC","Não existe","É CA coletivo","É uniforme"], "c":0}
+]
