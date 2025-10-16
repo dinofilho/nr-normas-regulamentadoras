@@ -1,102 +1,14 @@
 [
-  {
-    "q": "A NR-20 trata de:",
-    "a": [
-      "Eletricidade",
-      "Máquinas",
-      "Inflamáveis e combustíveis",
-      "Ergonomia"
-    ],
-    "c": 2
-  },
-  {
-    "q": "Complemento 1 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 2 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 3 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 4 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 5 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 6 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 7 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 8 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 9 (nr20)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  }
+  {"q":"A NR-20 trata de:", "a":["Eletricidade","Máquinas","Inflamáveis e combustíveis","Ergonomia"], "c":2},
+  {"q":"Um objetivo central da NR-20 é:", "a":["Definir limites de ruído","Estabelecer requisitos para gestão da segurança com inflamáveis e combustíveis","Normatizar proteção de máquina","Tratar de postura e mobiliário"], "c":1},
+  {"q":"No âmbito da NR-20, 'Análise de Risco' serve para:", "a":["Calcular folha de pagamento","Identificar perigos, avaliar riscos e propor controles","Avaliar conforto térmico","Definir compras"], "c":1},
+  {"q":"Na NR-20, o Plano de Resposta a Emergências deve:", "a":["Ficar apenas arquivado","Prever ações, recursos e responsabilidades para emergências","Ser feito só após acidentes","Ser opcional"], "c":1},
+  {"q":"Capacitação exigida pela NR-20:", "a":["Não há capacitação","Somente vídeo-aula, sem avaliação","Conforme nível (Básico/Intermediário/Avançado) e atividade","Somente prática"], "c":2},
+  {"q":"Reciclagem na NR-20:", "a":["Nunca é obrigatória","Conforme periodicidade definida e mudança de risco/atividade","Apenas por troca de endereço","Somente por afastamento"], "c":1},
+  {"q":"Medidas de controle típicas na NR-20 incluem:", "a":["EPC/EPI, procedimentos operacionais e PT","Somente EPI","Somente sinalização","Apenas registros"], "c":0},
+  {"q":"Permissão de Trabalho (PT) na NR-20:", "a":["É documento para atividades críticas, emitido antes da execução","É o crachá do trabalhador","É apenas uma etiqueta de bloqueio","É um recibo de EPI"], "c":0},
+  {"q":"Instalações com inflamáveis devem possuir:", "a":["Inventário de riscos e controles","Somente extintor portátil","Apenas treinamento inicial","Somente EPC"], "c":0},
+  {"q":"Sobre GLP em áreas de consumo:", "a":["Dispensa controle de vazamentos","Cilindros devem ficar ventilados e afastados de fontes de ignição","Pode ser aquecido diretamente","Não precisa identificação"], "c":1},
+  {"q":"Sinalização na NR-20:", "a":["Não se aplica","Deve indicar riscos, rotas de fuga, equipamentos e procedimentos","Serve apenas para decoração","Exclusiva para almoxarifado"], "c":1},
+  {"q":"Integração com PGR/GRO (NR-1) na NR-20:", "a":["Inexistente","Necessária para consolidar perigos, avaliações e controles","Somente RH faz","É proibida"], "c":1}
 ]

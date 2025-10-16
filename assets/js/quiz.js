@@ -26,20 +26,19 @@
     if(!r.ok) throw new Error("Arquivo de questões não encontrado");
     return r.json();
   }).then(qs=>{
-    // 1) remove duplicadas por texto (q)
+    // remove duplicadas por texto e limpa itens inválidos
     const vistos = new Set();
-    const uniq = [];
-    for (const it of qs) {
-      if (it && typeof it.q === "string" && !vistos.has(it.q.trim())) {
-        vistos.add(it.q.trim());
-        uniq.push(it);
+    const base = [];
+    for(const it of qs){
+      if(it && typeof it.q==="string" && Array.isArray(it.a) && it.a.length>=4 && Number.isInteger(it.c)){
+        const chave = it.q.trim();
+        if(!vistos.has(chave)){vistos.add(chave); base.push(it);}
       }
     }
-    // 2) embaralha e pega até 10 sem repetir
-    uniq.sort(()=>Math.random()-0.5);
-    const chosen = uniq.slice(0, Math.min(10, uniq.length));
+    // embaralha e escolhe 10
+    base.sort(()=>Math.random()-0.5);
+    const chosen = base.slice(0, Math.min(10, base.length));
 
-    // 3) monta o formulário
     chosen.forEach((item,idx)=>{
       const b = document.createElement("div");
       b.className="p-4 border rounded";

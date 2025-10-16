@@ -1,102 +1,14 @@
 [
-  {
-    "q": "A NR-1 define diretrizes gerais de SST. Qual documento integra o GRO?",
-    "a": [
-      "PCMSO",
-      "PPR",
-      "PGR",
-      "PPRA"
-    ],
-    "c": 2
-  },
-  {
-    "q": "Complemento 1 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 2 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 3 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 4 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 5 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 6 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 7 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 8 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  },
-  {
-    "q": "Complemento 9 (nr1)",
-    "a": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "c": 0
-  }
+  {"q":"A NR-1 define diretrizes gerais de SST e integra qual instrumento de gestão?", "a":["PCMSO","PPRA","PGR (no âmbito do GRO)","PPP"], "c":2},
+  {"q":"O PGR é composto, essencialmente, por:", "a":["Inventário de Riscos e Plano de Ação","CAT e PPP","PCMSO e ASO","Apenas ficha de EPI"], "c":0},
+  {"q":"Responsabilidades do empregador segundo a NR-1 incluem:", "a":["Fornecer EPIs e capacitação quando aplicável","Somente fiscalizar","Somente registrar acidentes","Apenas pagar adicional"], "c":0},
+  {"q":"Quanto às responsabilidades do empregado:", "a":["Não usar EPI","Usar e conservar EPI, cumprir procedimentos e participar das capacitações","Vender EPI","Guardar em casa"], "c":1},
+  {"q":"A avaliação de riscos no PGR deve:", "a":["Ser eventual e sem registro","Identificar perigos, avaliar riscos e definir medidas de controle","Somente copiar modelos","Ser delegada a qualquer trabalhador"], "c":1},
+  {"q":"Registros do PGR:", "a":["Dispensáveis","Devem ser mantidos e atualizados, com evidências das avaliações e ações","Apenas verbais","Somente anuais"], "c":1},
+  {"q":"Capacitação segundo NR-1 (quando aplicável):", "a":["Somente assinatura manual","Com conteúdos, carga mínima e avaliação, podendo ser EAD quando permitido","Apenas leitura de manual","Não prevista"], "c":1},
+  {"q":"Integração PGR/GRO com demais NRs:", "a":["Inexistente","Obrigatória para consolidar controles e monitoramento","Somente para NR-10","Apenas para CIPA"], "c":1},
+  {"q":"Mudança significativa no processo exige:", "a":["Nada","Revisão do PGR e, se necessário, nova avaliação e capacitação","Somente comunicado ao sindicato","Somente troca de EPI"], "c":1},
+  {"q":"Monitoramento de riscos no PGR:", "a":["Não é necessário","Acompanha eficácia das medidas e atualiza o plano de ação","Apenas quando há acidente","Somente auditar anual"], "c":1},
+  {"q":"Documentos que podem evidenciar o PGR incluem:", "a":["Logs e prints","Inventário de Riscos, Plano de Ação, registros de capacitação e PTs quando aplicáveis","Apenas crachá","Somente nota fiscal"], "c":1},
+  {"q":"Quando as avaliações devem ser registradas no PGR?", "a":["Nunca","Sempre que houver identificação de perigos, mudanças ou periodicidade definida","Somente quando há acidente","Somente na admissão"], "c":1}
 ]
