@@ -36,37 +36,74 @@
   const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className = ok?"msg ok":"msg"; };
   const params = new URLSearchParams(location.search);
   const raw = (params.get("curso")||"nr1").toLowerCase();
-  const curso = raw.replace(/[^a-z0-9]/g,""); // normaliza: "nr-1" -> "nr1"
+  const curso = raw.replace(/[^a-z0-9]/g,""); // "nr-33" -> "nr33"
   const human = "NR-" + curso.replace("nr","");
 
   $("#cursoInfo").innerHTML = '<input value="'+human+'" disabled>';
 
-  // Normalizador super tolerante
-  function normalize(data){
+  function normalizeQuestionsContainer(data){
     if(Array.isArray(data)) return data;
-    const v = (obj, keys)=>keys.map(k=>obj?.[k]).find(x=>Array.isArray(x));
-    // tenta direto
-    let arr = v(data||{}, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
+    const pickKeys=(obj, keys)=>keys.map(k=>obj?.[k]).find(v=>Array.isArray(v)&&v.length);
+    let arr = pickKeys(data||{}, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
     if(arr) return arr;
-    // tenta em "questions"
-    if(data && typeof data==="object"){
-      const q = data.questions || data.qs || data.items;
-      if(q && typeof q==="object"){
-        arr = v(q, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
-        if(arr) return arr;
+    const q = data && (data.questions || data.qs || data.items);
+    if(q && typeof q==="object"){
+      arr = pickKeys(q, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
+      if(arr) return arr;
+      // tenta por nome normalizado
+      for(const k of Object.keys(q)){
+        if(Array.isArray(q[k]) && k.toLowerCase().replace(/[^a-z0-9]/g,"")===curso) return q[k];
       }
     }
-    // tenta qualquer chave que, sem hífen e case-insensitive, bata com curso
+    // último recurso: percorre chaves de primeiro nível
     if(data && typeof data==="object"){
-      const pick = (obj)=>{
-        for(const k of Object.keys(obj)){
-          if(Array.isArray(obj[k]) && k.toLowerCase().replace(/[^a-z0-9]/g,"")===curso) return obj[k];
-        }
-      };
-      let p = pick(data); if(p) return p;
-      if(data.questions) { p = pick(data.questions); if(p) return p; }
+      for(const k of Object.keys(data)){
+        if(Array.isArray(data[k]) && k.toLowerCase().replace(/[^a-z0-9]/g,"")===curso) return data[k];
+      }
     }
-    return null;
+    return [];
+  }
+
+  // --- CANONIZA UMA QUESTÃO --- //
+  function canon(it){
+    const clean = (v)=> (v==null ? "" : String(v)).trim();
+    const isBad = (v)=> !v || /^\s*$/.test(v) || /^\s*1\s*$/.test(v); // "1" de placeholder
+    const q = clean(it.q || it.question || it.pergunta || "");
+    let a = clean(it.a), b = clean(it.b), c = clean(it.c), d = clean(it.d);
+
+    // Se veio options: [...]
+    if((!a && !b && !c && !d) && Array.isArray(it.options)){
+      [a,b,c,d] = (it.options.map(clean).concat(["","", "", ""])).slice(0,4);
+    }
+
+    // Se só A tem tudo colado por vírgula e B/C/D vazias/“1”, divide A
+    if(!isBad(a) && (isBad(b)&&isBad(c)&&isBad(d)) && a.includes(",")){
+      const parts = a.split(",").map(s=>s.trim()).filter(Boolean);
+      [a,b,c,d] = (parts.concat(["","", "", ""])).slice(0,4);
+    }
+
+    // Garante 4 alternativas
+    a = a || "—"; b = b || "—"; c = c || "—"; d = d || "—";
+
+    // Normaliza resposta
+    let ans = it.ans ?? it.answer ?? it.correct ?? it.resp ?? it.certa;
+    if(typeof ans === "number"){ ans = ['a','b','c','d'][Math.max(0, Math.min(3, ans>0?ans-1:ans))]; }
+    if(typeof ans === "string"){
+      let s = ans.trim().toLowerCase();
+      if(/^[abcd]$/.test(s)) { /* ok */ }
+      else if(/^[1234]$/.test(s)) { ans = ['a','b','c','d'][parseInt(s,10)-1]; }
+      else if(/^[0-3]$/.test(s)) { ans = ['a','b','c','d'][parseInt(s,10)]; }
+      else {
+        // tenta casar pelo texto da alternativa
+        const map = {a,b,c,d};
+        for(const k of ['a','b','c','d']){
+          if(map[k].toLowerCase()===s) { ans = k; break; }
+        }
+      }
+    }
+    if(!/^[abcd]$/.test(String(ans))) ans = 'a'; // fallback seguro
+
+    return { q, a, b, c, d, ans };
   }
 
   async function loadQuestions(){
@@ -80,8 +117,8 @@
         const r = await fetch(u, {cache:'no-store'});
         if(!r.ok) continue;
         const j = await r.json();
-        const arr = normalize(j);
-        if(arr && Array.isArray(arr) && arr.length) return arr;
+        const arr = normalizeQuestionsContainer(j);
+        if(arr && arr.length) return arr.map(canon);
       }catch(e){}
     }
     return [];
@@ -110,7 +147,7 @@
     let ok=0;
     questions.forEach((it,idx)=>{
       const sel = document.querySelector(`input[name="q${idx+1}"]:checked`);
-      if(sel && sel.value === (it.ans||it.answer||it.correct)) ok++;
+      if(sel && sel.value === it.ans) ok++;
     });
     return Math.round((ok/questions.length)*100);
   }
