@@ -1,55 +1,12 @@
-{
-  "titulo": "NR-1 - Disposições Gerais e Gerenciamento de Riscos Ocupacionais (GRO)",
-  "questoes": [
-    {
-      "pergunta": "1. A NR-1 estabelece disposições gerais sobre:",
-      "alternativas": ["A) Gerenciamento de Riscos Ocupacionais e capacitação de trabalhadores", "B) Eletricidade e instalações", "C) Espaços confinados", "D) Combate a incêndios"],
-      "correta": "A"
-    },
-    {
-      "pergunta": "2. Qual documento integra o Programa de Gerenciamento de Riscos (PGR)?",
-      "alternativas": ["A) PPRA", "B) PCMSO", "C) Inventário de Riscos", "D) LTCAT"],
-      "correta": "C"
-    },
-    {
-      "pergunta": "3. De acordo com a NR-1, o treinamento EAD é permitido quando:",
-      "alternativas": ["A) O conteúdo permitir e houver acompanhamento e avaliação", "B) Apenas se for NR-10", "C) O trabalhador preferir", "D) A empresa não tiver espaço físico"],
-      "correta": "A"
-    },
-    {
-      "pergunta": "4. O GRO é composto por quais elementos principais?",
-      "alternativas": ["A) PCMSO e LTCAT", "B) PGR e ações de melhoria contínua", "C) CIPA e CAT", "D) APR e AET"],
-      "correta": "B"
-    },
-    {
-      "pergunta": "5. O PGR deve ser elaborado por:",
-      "alternativas": ["A) Qualquer funcionário", "B) Pessoa ou equipe designada com capacitação técnica", "C) Apenas o empregador", "D) O sindicato"],
-      "correta": "B"
-    },
-    {
-      "pergunta": "6. A revisão do PGR deve ocorrer:",
-      "alternativas": ["A) Somente quando a empresa mudar de endereço", "B) Pelo menos uma vez ao ano ou quando houver mudanças significativas", "C) A cada cinco anos", "D) Nunca é obrigatória"],
-      "correta": "B"
-    },
-    {
-      "pergunta": "7. De acordo com a NR-1, o treinamento inicial deve ocorrer:",
-      "alternativas": ["A) Antes que o trabalhador assuma suas atividades", "B) Somente após 30 dias de trabalho", "C) Após o exame médico admissional", "D) Quando solicitado pelo empregado"],
-      "correta": "A"
-    },
-    {
-      "pergunta": "8. A empresa deve manter registro dos treinamentos por quanto tempo?",
-      "alternativas": ["A) 1 ano", "B) 2 anos", "C) 5 anos", "D) Enquanto durar o vínculo do empregado e mais 5 anos"],
-      "correta": "D"
-    },
-    {
-      "pergunta": "9. A análise preliminar de riscos (APR) é uma ferramenta usada para:",
-      "alternativas": ["A) Substituir o PGR", "B) Identificar e avaliar riscos antes da execução das atividades", "C) Controlar acesso de visitantes", "D) Emitir PPP"],
-      "correta": "B"
-    },
-    {
-      "pergunta": "10. O descumprimento das normas regulamentadoras pode resultar em:",
-      "alternativas": ["A) Advertência verbal apenas", "B) Multas e penalidades legais", "C) Somente notificação simples", "D) Nenhuma consequência"],
-      "correta": "B"
-    }
-  ]
-}
+[
+  {"q":"A NR-1 estabelece disposições gerais de SST. Qual documento integra o GRO?","a":"PCMSO","b":"PPRA","c":"PGR","d":"PPP","ans":"c"},
+  {"q":"O PGR é composto por quais elementos principais?","a":"Relatório financeiro e PCMSO","b":"Inventário de riscos e plano de ação","c":"CIPA e PPP","d":"SIPAT e atas","ans":"b"},
+  {"q":"Na hierarquia de controles, qual opção vem antes do uso de EPI?","a":"Substituição/engenharia e EPC","b":"Treinamento apenas","c":"Cartazes informativos","d":"Nenhuma","ans":"a"},
+  {"q":"Quem é responsável por implementar e manter o PGR?","a":"Somente o empregado","b":"Somente a CIPA","c":"Empregador, com participação dos trabalhadores","d":"A prefeitura","ans":"c"},
+  {"q":"Capacitações previstas na NR-1 devem ter:","a":"Conteúdo, carga horária, avaliação e registros","b":"Apenas lista de presença","c":"Somente vídeo","d":"Apenas assinatura do RH","ans":"a"},
+  {"q":"Quando o EAD é aceitável segundo a NR-1?","a":"Nunca é aceitável","b":"Sempre sem critérios","c":"Conforme a NR específica e requisitos de avaliação/registro","d":"Somente se for gratuito","ans":"c"},
+  {"q":"Inventário de riscos do PGR deve:","a":"Citar perigos, avaliar riscos e indicar controles","b":"Apresentar fotos apenas","c":"Conter apenas estatísticas","d":"Tratar só riscos ergonômicos","ans":"a"},
+  {"q":"Registros da avaliação do treinamento devem:","a":"Ser verbais","b":"Ser guardados conforme prazos e disponíveis para auditoria","c":"Ser descartados ao fim do dia","d":"Ficar com o aluno","ans":"b"},
+  {"q":"Integração entre PGR e outras NRs significa:","a":"Cada NR isolada, sem conexão","b":"PGR orienta controles e capacitações das NRs aplicáveis","c":"Apenas CIPA cuida disso","d":"Não se aplica","ans":"b"},
+  {"q":"Revisões do PGR devem ocorrer:","a":"A cada 20 anos","b":"Somente após multa","c":"Periodicamente e quando houver mudanças relevantes","d":"Nunca","ans":"c"}
+]
