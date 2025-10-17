@@ -1,29 +1,152 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz – Avaliação Teórica</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head><body class="bg-gray-50 text-gray-900">
-<header class="bg-blue-900 text-white p-4"><div class="max-w-4xl mx-auto flex justify-between">
-  <a href="index.html" class="font-bold">NR NORMAS REGULAMENTADORAS</a><span id="cursoTag"></span>
-</div></header>
-<main class="max-w-4xl mx-auto p-6">
-  <h1 class="text-2xl font-bold mb-4">Avaliação Teórica</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Avaliação Teórica</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:#f8fafc;margin:0}
+  .wrap{max-width:920px;margin:32px auto;padding:0 16px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:20px}
+  h1{margin:0 0 16px;font-size:28px}
+  .row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .row input,.row select{flex:1 1 260px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px}
+  .q{border-top:1px dashed #e5e7eb;padding-top:14px;margin-top:14px}
+  .q h3{font-size:16px;margin:0 0 8px}
+  .opts label{display:block;margin:6px 0;cursor:pointer}
+  .btn{background:#2563eb;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:600;cursor:pointer}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
+  .msg{margin:12px 0;color:#b91c1c}
+  .ok{color:#065f46}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Avaliação Teórica</h1>
 
-  <!-- Identificação -->
-  <div class="grid md:grid-cols-3 gap-4 mb-6">
-    <input id="aluno" class="border p-2 rounded" placeholder="Nome completo">
-    <input id="cpf"   class="border p-2 rounded" placeholder="CPF (000.000.000-00)">
-    <input id="email" class="border p-2 rounded" placeholder="(opcional) e-mail">
+      <div id="cursoInfo" class="row"></div>
+
+      <div class="row">
+        <input id="nome" placeholder="Nome completo">
+        <input id="cpf" placeholder="CPF (000.000.000-00)">
+        <input id="email" placeholder="(opcional) e-mail">
+      </div>
+
+      <div id="quiz"></div>
+
+      <div class="row" style="margin-top:18px">
+        <button id="enviar" class="btn">Enviar respostas</button>
+      </div>
+
+      <div id="msg" class="msg"></div>
+    </div>
   </div>
 
-  <form id="quizForm" class="space-y-6"></form>
+<script>
+(function(){
+  const $ = (sel)=>document.querySelector(sel);
+  const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className = ok? "msg ok":"msg"; }
 
-  <div class="flex items-center gap-3 mt-6">
-    <button id="btnEnviar" class="bg-blue-700 text-white px-5 py-3 rounded-xl">Enviar respostas</button>
-    <a id="btnComprovante" href="comprovante.html" class="bg-green-600 text-white px-4 py-2 rounded hidden">Baixar Comprovante (PDF)</a>
-  </div>
+  const params = new URLSearchParams(location.search);
+  const curso = (params.get("curso")||"nr1").toLowerCase();
+  const human = curso.toUpperCase().replace(/^NR/,"NR-");
+  $("#cursoInfo").innerHTML = '<input value="'+human+'" disabled>';
 
-  <p id="resultado" class="mt-6 text-lg font-semibold"></p>
-</main>
-<script src="assets/js/quiz.js"></script>
-</body></html>
+  // Normaliza diferentes formatos em um ARRAY de {q, a,b,c,d, ans}
+  function normalize(data){
+    if(Array.isArray(data)) return data;
+    if(data && Array.isArray(data[curso])) return data[curso];
+    if(data && data.questions && Array.isArray(data.questions[curso])) return data.questions[curso];
+    // alguns loaders usam chave 'qs' ou 'items'
+    if(data && Array.isArray(data.qs)) return data.qs;
+    if(data && Array.isArray(data.items)) return data.items;
+    return null;
+  }
+
+  async function loadQuestions(){
+    // 1) tenta arquivo por curso
+    const urls = [
+      `assets/questions/${curso}.json`,
+      'assets/questions/questions.json'
+    ];
+    for(const u of urls){
+      try{
+        const r = await fetch(u, {cache:'no-store'});
+        if(!r.ok) continue;
+        const j = await r.json();
+        const arr = normalize(j);
+        if(arr && Array.isArray(arr) && arr.length){
+          return arr;
+        }
+      }catch(e){ /* tenta próxima */ }
+    }
+    return null;
+  }
+
+  function render(questions){
+    const host = $("#quiz");
+    host.innerHTML = "";
+    questions.forEach((it,idx)=>{
+      const qid = `q${idx+1}`;
+      const block = document.createElement("div");
+      block.className = "q";
+      block.innerHTML = `
+        <h3>${idx+1}. ${it.q}</h3>
+        <div class="opts">
+          ${['a','b','c','d'].map(k=>{
+            const optId = `${qid}_${k}`;
+            const label = it[k] ?? '';
+            return `<label><input type="radio" name="${qid}" value="${k}"> ${label}</label>`;
+          }).join('')}
+        </div>
+      `;
+      host.appendChild(block);
+    });
+  }
+
+  function nota(questions){
+    let acertos = 0;
+    questions.forEach((it,idx)=>{
+      const qid = `q${idx+1}`;
+      const sel = document.querySelector(`input[name="${qid}"]:checked`);
+      if(sel && sel.value === (it.ans||it.answer||it.correct)) acertos++;
+    });
+    return Math.round((acertos/questions.length)*100);
+  }
+
+  function goComprovante(curso,nome,cpf,email,score){
+    const url = new URL('comprovante.html', location.href);
+    url.searchParams.set('curso', curso.toUpperCase());
+    url.searchParams.set('nome', nome);
+    url.searchParams.set('cpf', cpf);
+    url.searchParams.set('nota', String(score));
+    if(email) url.searchParams.set('email', email);
+    location.href = url.toString();
+  }
+
+  loadQuestions().then(qts=>{
+    if(!qts){
+      msg('Não foi possível carregar as questões deste curso.');
+      $("#enviar").disabled = true;
+      return;
+    }
+    render(qts);
+    msg('Carregado. Responda e envie.', true);
+
+    $("#enviar").onclick = ()=>{
+      const nome = $("#nome").value.trim();
+      const cpf  = $("#cpf").value.trim();
+      const email= $("#email").value.trim();
+      if(!nome || !cpf){
+        msg('Preencha Nome e CPF para continuar.');
+        return;
+      }
+      const score = nota(qts);
+      goComprovante(curso, nome, cpf, email, score);
+    };
+  });
+})();
+</script>
+</body>
+</html>
