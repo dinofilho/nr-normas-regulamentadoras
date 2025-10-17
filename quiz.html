@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avaliação Teórica</title>
 <style>
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:#f8fafc;margin:0}
@@ -10,7 +7,7 @@
   .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:20px}
   h1{margin:0 0 16px;font-size:28px}
   .row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
-  .row input,.row select{flex:1 1 260px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px}
+  .row input{flex:1 1 260px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px}
   .q{border-top:1px dashed #e5e7eb;padding-top:14px;margin-top:14px}
   .q h3{font-size:16px;margin:0 0 8px}
   .opts label{display:block;margin:6px 0;cursor:pointer}
@@ -19,55 +16,63 @@
   .msg{margin:12px 0;color:#b91c1c}
   .ok{color:#065f46}
 </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <h1>Avaliação Teórica</h1>
-
-      <div id="cursoInfo" class="row"></div>
-
-      <div class="row">
-        <input id="nome" placeholder="Nome completo">
-        <input id="cpf" placeholder="CPF (000.000.000-00)">
-        <input id="email" placeholder="(opcional) e-mail">
-      </div>
-
-      <div id="quiz"></div>
-
-      <div class="row" style="margin-top:18px">
-        <button id="enviar" class="btn">Enviar respostas</button>
-      </div>
-
-      <div id="msg" class="msg"></div>
-    </div>
+</head><body>
+<div class="wrap"><div class="card">
+  <h1>Avaliação Teórica</h1>
+  <div id="cursoInfo" class="row"></div>
+  <div class="row">
+    <input id="nome" placeholder="Nome completo">
+    <input id="cpf" placeholder="CPF (000.000.000-00)">
+    <input id="email" placeholder="(opcional) e-mail">
   </div>
+  <div id="quiz"></div>
+  <div class="row" style="margin-top:18px"><button id="enviar" class="btn">Enviar respostas</button></div>
+  <div id="msg" class="msg"></div>
+</div></div>
 
 <script>
 (function(){
-  const $ = (sel)=>document.querySelector(sel);
-  const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className = ok? "msg ok":"msg"; }
-
+  const $ = (s)=>document.querySelector(s);
+  const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className = ok?"msg ok":"msg"; };
   const params = new URLSearchParams(location.search);
-  const curso = (params.get("curso")||"nr1").toLowerCase();
-  const human = curso.toUpperCase().replace(/^NR/,"NR-");
+  const raw = (params.get("curso")||"nr1").toLowerCase();
+  const curso = raw.replace(/[^a-z0-9]/g,""); // normaliza: "nr-1" -> "nr1"
+  const human = "NR-" + curso.replace("nr","");
+
   $("#cursoInfo").innerHTML = '<input value="'+human+'" disabled>';
 
-  // Normaliza diferentes formatos em um ARRAY de {q, a,b,c,d, ans}
+  // Normalizador super tolerante
   function normalize(data){
     if(Array.isArray(data)) return data;
-    if(data && Array.isArray(data[curso])) return data[curso];
-    if(data && data.questions && Array.isArray(data.questions[curso])) return data.questions[curso];
-    // alguns loaders usam chave 'qs' ou 'items'
-    if(data && Array.isArray(data.qs)) return data.qs;
-    if(data && Array.isArray(data.items)) return data.items;
+    const v = (obj, keys)=>keys.map(k=>obj?.[k]).find(x=>Array.isArray(x));
+    // tenta direto
+    let arr = v(data||{}, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
+    if(arr) return arr;
+    // tenta em "questions"
+    if(data && typeof data==="object"){
+      const q = data.questions || data.qs || data.items;
+      if(q && typeof q==="object"){
+        arr = v(q, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
+        if(arr) return arr;
+      }
+    }
+    // tenta qualquer chave que, sem hífen e case-insensitive, bata com curso
+    if(data && typeof data==="object"){
+      const pick = (obj)=>{
+        for(const k of Object.keys(obj)){
+          if(Array.isArray(obj[k]) && k.toLowerCase().replace(/[^a-z0-9]/g,"")===curso) return obj[k];
+        }
+      };
+      let p = pick(data); if(p) return p;
+      if(data.questions) { p = pick(data.questions); if(p) return p; }
+    }
     return null;
   }
 
   async function loadQuestions(){
-    // 1) tenta arquivo por curso
     const urls = [
       `assets/questions/${curso}.json`,
+      `assets/questions/nr-${curso.slice(2)}.json`,
       'assets/questions/questions.json'
     ];
     for(const u of urls){
@@ -76,12 +81,10 @@
         if(!r.ok) continue;
         const j = await r.json();
         const arr = normalize(j);
-        if(arr && Array.isArray(arr) && arr.length){
-          return arr;
-        }
-      }catch(e){ /* tenta próxima */ }
+        if(arr && Array.isArray(arr) && arr.length) return arr;
+      }catch(e){}
     }
-    return null;
+    return [];
   }
 
   function render(questions){
@@ -95,27 +98,24 @@
         <h3>${idx+1}. ${it.q}</h3>
         <div class="opts">
           ${['a','b','c','d'].map(k=>{
-            const optId = `${qid}_${k}`;
             const label = it[k] ?? '';
             return `<label><input type="radio" name="${qid}" value="${k}"> ${label}</label>`;
           }).join('')}
-        </div>
-      `;
+        </div>`;
       host.appendChild(block);
     });
   }
 
   function nota(questions){
-    let acertos = 0;
+    let ok=0;
     questions.forEach((it,idx)=>{
-      const qid = `q${idx+1}`;
-      const sel = document.querySelector(`input[name="${qid}"]:checked`);
-      if(sel && sel.value === (it.ans||it.answer||it.correct)) acertos++;
+      const sel = document.querySelector(`input[name="q${idx+1}"]:checked`);
+      if(sel && sel.value === (it.ans||it.answer||it.correct)) ok++;
     });
-    return Math.round((acertos/questions.length)*100);
+    return Math.round((ok/questions.length)*100);
   }
 
-  function goComprovante(curso,nome,cpf,email,score){
+  function comprovante(curso,nome,cpf,email,score){
     const url = new URL('comprovante.html', location.href);
     url.searchParams.set('curso', curso.toUpperCase());
     url.searchParams.set('nome', nome);
@@ -126,27 +126,19 @@
   }
 
   loadQuestions().then(qts=>{
-    if(!qts){
-      msg('Não foi possível carregar as questões deste curso.');
+    if(!qts.length){
+      msg('Não foi possível carregar as questões deste curso (nenhuma questão encontrada).');
       $("#enviar").disabled = true;
       return;
     }
-    render(qts);
-    msg('Carregado. Responda e envie.', true);
-
+    render(qts); msg('Carregado. Responda e envie.', true);
     $("#enviar").onclick = ()=>{
-      const nome = $("#nome").value.trim();
-      const cpf  = $("#cpf").value.trim();
-      const email= $("#email").value.trim();
-      if(!nome || !cpf){
-        msg('Preencha Nome e CPF para continuar.');
-        return;
-      }
+      const nome=$("#nome").value.trim(), cpf=$("#cpf").value.trim(), email=$("#email").value.trim();
+      if(!nome || !cpf){ msg('Preencha Nome e CPF para continuar.'); return; }
       const score = nota(qts);
-      goComprovante(curso, nome, cpf, email, score);
+      comprovante(curso, nome, cpf, email, score);
     };
   });
 })();
 </script>
-</body>
-</html>
+</body></html>
