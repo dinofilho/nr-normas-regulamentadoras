@@ -19,7 +19,9 @@
   <script src="auto-grade.js" defer></script>
 </head><body>
 <div class="wrap"><div class="card">
-  <h1>Avaliação Teórica</h1>
+  <h1>Avaliação Teórica</h1><div id="placar-nota" style="margin:16px 0;font-weight:600;"></div>
+<input type="hidden" id="nota" name="nota">
+
   <div id="cursoInfo" class="row"></div>
   <div class="row">
     <input id="nome" placeholder="Nome completo">
@@ -200,7 +202,8 @@
       comprovante(curso, nome, cpf, email, score);
     };
   });
-})();
+})();<script src="auto-grade.js" defer></script>
+
 </script>
 <script src="/nr-normas-regulamentadoras/inject-date.js" defer></script>
 </body></html>
