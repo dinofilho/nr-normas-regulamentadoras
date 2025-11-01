@@ -1,82 +1,12 @@
 [
-  {
-    "q": "A NR-1 estabelece disposições gerais de SST. Qual documento integra o GRO?",
-    "a": "PCMSO",
-    "b": "PPRA",
-    "c": "PGR",
-    "d": "PPP",
-    "ans": "c"
-  },
-  {
-    "q": "O PGR é composto por quais elementos principais?",
-    "a": "Relatório financeiro e PCMSO",
-    "b": "Inventário de riscos e plano de ação",
-    "c": "CIPA e PPP",
-    "d": "SIPAT e atas",
-    "ans": "b"
-  },
-  {
-    "q": "Na hierarquia de controles, qual opção vem antes do uso de EPI?",
-    "a": "Substituição/engenharia e EPC",
-    "b": "Treinamento apenas",
-    "c": "Cartazes informativos",
-    "d": "Nenhuma",
-    "ans": "a"
-  },
-  {
-    "q": "Quem é responsável por implementar e manter o PGR?",
-    "a": "Somente o empregado",
-    "b": "Somente a CIPA",
-    "c": "Empregador, com participação dos trabalhadores",
-    "d": "A prefeitura",
-    "ans": "c"
-  },
-  {
-    "q": "Capacitações previstas na NR-1 devem ter:",
-    "a": "Conteúdo, carga horária, avaliação e registros",
-    "b": "Apenas lista de presença",
-    "c": "Somente vídeo",
-    "d": "Apenas assinatura do RH",
-    "ans": "a"
-  },
-  {
-    "q": "Quando o EAD é aceitável segundo a NR-1?",
-    "a": "Nunca é aceitável",
-    "b": "Sempre sem critérios",
-    "c": "Conforme a NR específica e requisitos de avaliação/registro",
-    "d": "Somente se for gratuito",
-    "ans": "c"
-  },
-  {
-    "q": "Inventário de riscos do PGR deve:",
-    "a": "Citar perigos, avaliar riscos e indicar controles",
-    "b": "Apresentar fotos apenas",
-    "c": "Conter apenas estatísticas",
-    "d": "Tratar só riscos ergonômicos",
-    "ans": "a"
-  },
-  {
-    "q": "Registros da avaliação do treinamento devem:",
-    "a": "Ser verbais",
-    "b": "Ser guardados conforme prazos e disponíveis para auditoria",
-    "c": "Ser descartados ao fim do dia",
-    "d": "Ficar com o aluno",
-    "ans": "b"
-  },
-  {
-    "q": "Integração entre PGR e outras NRs significa:",
-    "a": "Cada NR isolada, sem conexão",
-    "b": "PGR orienta controles e capacitações das NRs aplicáveis",
-    "c": "Apenas CIPA cuida disso",
-    "d": "Não se aplica",
-    "ans": "b"
-  },
-  {
-    "q": "Revisões do PGR devem ocorrer:",
-    "a": "A cada 20 anos",
-    "b": "Somente após multa",
-    "c": "Periodicamente e quando houver mudanças relevantes",
-    "d": "Nunca",
-    "ans": "c"
-  }
+ {"q":"A NR-1 estabelece disposições gerais de SST. Qual documento integra o GRO?","a":"PCMSO","b":"PPRA","c":"PGR","d":"PPP","ans":"c"},
+ {"q":"O PGR é composto por quais elementos?","a":"Relatório financeiro","b":"Inventário de riscos e plano de ação","c":"SIPAT e atas","d":"PPP e CAT","ans":"b"},
+ {"q":"O GRO trata de:","a":"Gestão de riscos ocupacionais","b":"Gestão de RH","c":"Gestão fiscal","d":"TI","ans":"a"},
+ {"q":"Quem deve implementar o GRO/PGR?","a":"Empregador","b":"Somente CIPA","c":"Somente SESMT","d":"Somente empregados","ans":"a"},
+ {"q":"Perigo é:","a":"Fonte com potencial de causar dano","b":"Consequência do dano","c":"Medida de controle","d":"Evento sem risco","ans":"a"},
+ {"q":"Risco é função de:","a":"Probabilidade e gravidade","b":"Salário","c":"Tempo de serviço","d":"Idade","ans":"a"},
+ {"q":"Medida de controle prioritária:","a":"EPI","b":"Substituição/eliminação do perigo","c":"Treinamento somente","d":"Sinalização apenas","ans":"b"},
+ {"q":"Evidência do GRO:","a":"Registros e logs","b":"Somente conversa verbal","c":"Cartaz","d":"—","ans":"a"},
+ {"q":"Inventário de riscos contém:","a":"Perigos, avaliações e controles","b":"Somente EPIs","c":"Folha de ponto","d":"—","ans":"a"},
+ {"q":"Plano de ação do PGR define:","a":"Responsáveis e prazos","b":"Apenas custo","c":"Apenas EPI","d":"—","ans":"a"}
 ]

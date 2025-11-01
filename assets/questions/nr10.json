@@ -1,12 +1,12 @@
 [
- {"q":"A NR-10 trata de:", "a":["Eletricidade","Máquinas","Espaço confinado","Altura"], "c":0},
- {"q":"Choque elétrico e arco:", "a":["Não são riscos","São riscos relevantes","Apenas baixa tensão","Somente em média tensão"], "c":1},
- {"q":"Documento de segurança em serviços:", "a":["PPRA","PGR/Procedimentos e prontuário","PET","CAT"], "c":1},
- {"q":"Bloqueio e etiquetagem:", "a":["Não se aplica","Somente escritório","Medida de controle essencial","Proibido"], "c":2},
- {"q":"Trabalhos energizados exigem:", "a":["Nada especial","Autorização, procedimentos e EPI/EPC","Apenas luvas","Somente extintor"], "c":1},
- {"q":"Treinamento teórico:", "a":["Pode ser EAD","Proibido","Somente oral","Sem avaliação"], "c":0},
- {"q":"Prontuário de instalações:", "a":["Dispensável","Manter atualizado","Somente foto","Somente diagrama"], "c":1},
- {"q":"Aterramento e equipotencialização:", "a":["Indiferentes","Medidas importantes","Somente estética","Proibidos"], "c":1},
- {"q":"Primeiros socorros e combate a incêndio:", "a":["Irrelevantes","Conteúdos do curso","Somente CIPA","Somente brigada"], "c":1},
- {"q":"Responsabilidade do empregador:", "a":["Fornecer condições seguras e capacitar","Somente punir","Ignorar terceirizados","Apenas comprar EPI"], "c":0}
+ {"q":"A NR-10 trata de:","a":"Segurança em instalações e serviços em eletricidade","b":"Inflamáveis","c":"Altura","d":"—","ans":"a"},
+ {"q":"Prontuário das instalações elétricas:","a":"Conjunto de documentos obrigatórios","b":"Livro caixa","c":"—","d":"—","ans":"a"},
+ {"q":"Treinamento básico NR-10:","a":"40 horas","b":"8 horas","c":"4 horas","d":"—","ans":"a"},
+ {"q":"Medida básica em painéis:","a":"Bloqueio e sinalização","b":"Pintura","c":"—","d":"—","ans":"a"},
+ {"q":"Trabalho desenergizado requer:","a":"Bloqueio, impedimento de reenergização e constatação de ausência de tensão","b":"Somente luva","c":"—","d":"—","ans":"a"},
+ {"q":"Zona controlada refere-se a:","a":"Áreas com risco elétrico","b":"Área administrativa","c":"—","d":"—","ans":"a"},
+ {"q":"EPI típico NR-10:","a":"Luva isolante classe adequada","b":"Capacete de obra comum","c":"—","d":"—","ans":"a"},
+ {"q":"APR em eletricidade:","a":"Obrigatória","b":"Opcional","c":"—","d":"—","ans":"a"},
+ {"q":"Documento para trabalho próximo:","a":"Permissão de trabalho (PT)","b":"Nota fiscal","c":"—","d":"—","ans":"a"},
+ {"q":"SPDA trata de:","a":"Proteção contra descargas atmosféricas","b":"Combate a incêndio","c":"—","d":"—","ans":"a"}
 ]

@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-6 trata de:","a":"EPI","b":"Máquinas","c":"Ergonomia","d":"Inflamáveis","ans":"a"},
+ {"q":"EPI é:","a":"Equipamento de Proteção Individual","b":"Equipamento de Produção Industrial","c":"—","d":"—","ans":"a"},
+ {"q":"Responsável por fornecer EPI:","a":"Empregador","b":"Empregado","c":"Fornecedor","d":"—","ans":"a"},
+ {"q":"CA significa:","a":"Certificado de Aprovação","b":"Cadastro de Almoxarifado","c":"—","d":"—","ans":"a"},
+ {"q":"Treinar uso do EPI é:","a":"Obrigação do empregador","b":"Opcional","c":"Do sindicato","d":"—","ans":"a"},
+ {"q":"Prioridade de controle:","a":"Coletivo antes de EPI","b":"EPI antes de coletivo","c":"—","d":"—","ans":"a"},
+ {"q":"Higienização/substituição do EPI:","a":"De responsabilidade do empregador","b":"Nunca","c":"—","d":"—","ans":"a"},
+ {"q":"Registro de entrega:","a":"Deve ser mantido","b":"Dispensável","c":"—","d":"—","ans":"a"},
+ {"q":"EPI sem CA válido:","a":"Não pode ser utilizado","b":"Pode sempre","c":"—","d":"—","ans":"a"},
+ {"q":"Exemplo de EPI:","a":"Respirador PFF2","b":"Guarda-corpo","c":"Exaustão local","d":"—","ans":"a"}
+]

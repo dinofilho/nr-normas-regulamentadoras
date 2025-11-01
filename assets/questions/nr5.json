@@ -1,0 +1,12 @@
+[
+ {"q":"A NR-5 trata de:","a":"CIPA","b":"Eletricidade","c":"Ergonomia","d":"Máquinas","ans":"a"},
+ {"q":"CIPA significa:","a":"Comissão Interna de Prevenção de Acidentes","b":"Controle Interno de Produção","c":"Cadastro Interno de Pessoas","d":"—","ans":"a"},
+ {"q":"Mandato dos membros (regra geral):","a":"1 ano com possibilidade de reeleição","b":"5 anos","c":"6 meses","d":"—","ans":"a"},
+ {"q":"Presidente da CIPA:","a":"Designado pelo empregador","b":"Eleito pelos empregados","c":"Sindicato","d":"—","ans":"a"},
+ {"q":"Atribuição da CIPA:","a":"Identificar riscos e propor medidas","b":"Aplicar multa","c":"Pagar salários","d":"—","ans":"a"},
+ {"q":"Reuniões da CIPA:","a":"Mensais","b":"Semestrais","c":"Bienais","d":"—","ans":"a"},
+ {"q":"Treinamento CIPA mínimo:","a":"8 horas (conteúdo mínimo NR-5)","b":"2 horas","c":"40 horas","d":"—","ans":"a"},
+ {"q":"Mapa de risco:","a":"Representação gráfica dos riscos","b":"Mapa de rotas","c":"Mapa de vendas","d":"—","ans":"a"},
+ {"q":"Estabilidade do cipeiro:","a":"Do registro da candidatura até 1 ano após o mandato","b":"Somente durante o curso","c":"Nenhuma","d":"—","ans":"a"},
+ {"q":"Atas de reunião:","a":"Devem ser registradas e arquivadas","b":"Não são necessárias","c":"Somente por e-mail","d":"—","ans":"a"}
+]
