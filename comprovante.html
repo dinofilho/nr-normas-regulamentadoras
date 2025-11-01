@@ -15,28 +15,29 @@
  @media print {.btn{display:none}}
 </style>
 </head><body>
-<div class="wrap">
-  <div class="card">
-    <h1>Comprovante de Avaliação</h1>
-    <div class="grid">
-      <div class="item"><div class="label">Curso</div><div id="c" class="val">—</div></div>
-      <div class="item"><div class="label">Nota</div><div id="n" class="val">—</div></div>
-      <div class="item"><div class="label">Nome</div><div id="nm" class="val">—</div></div>
-      <div class="item"><div class="label">CPF</div><div id="cp" class="val">—</div></div>
-      <div class="item"><div class="label">Data</div><div id="dt" class="val">—</div></div>
-      <div class="item"><div class="label">Código verificador</div><div id="v" class="val">—</div></div>
-    </div>
-    <div class="row">
-      <button class="btn" onclick="window.print()">Imprimir / Salvar em PDF</button>
-    </div>
+<div class="wrap"><div class="card">
+  <h1>Comprovante de Avaliação</h1>
+  <div class="grid">
+    <div class="item"><div class="label">Curso</div><div id="c" class="val">—</div></div>
+    <div class="item"><div class="label">Nota</div><div id="n" class="val">—</div></div>
+    <div class="item"><div class="label">Nome</div><div id="nm" class="val">—</div></div>
+    <div class="item"><div class="label">CPF</div><div id="cp" class="val">—</div></div>
+    <div class="item"><div class="label">Data</div><div id="dt" class="val">—</div></div>
+    <div class="item"><div class="label">Código verificador</div><div id="v" class="val">—</div></div>
   </div>
-</div>
+  <div class="row"><button class="btn" onclick="window.print()">Imprimir / Salvar em PDF</button></div>
+</div></div>
 <script>
 (function(){
   try{
-    const d = JSON.parse(localStorage.getItem("cert_dados")||"{}");
-    const mapa = {c:"curso", n:"nota", nm:"nome", cp:"cpf", dt:"data", v:"ver"};
-    for(const id in mapa){ document.getElementById(id).textContent = d[mapa[id]] ?? "—"; }
+    const d=JSON.parse(localStorage.getItem("cert_dados")||"{}");
+    const nomes={nr1:"NR-1 – Disposições Gerais e GRO",nr20:"NR-20 – Inflamáveis e Combustíveis",nr33:"NR-33 – Espaço Confinado",nr35:"NR-35 – Trabalho em Altura",nr10:"NR-10 – Segurança em Eletricidade",nr5:"NR-05 – CIPA",nr6:"NR-06 – EPI"};
+    document.getElementById("c").textContent = nomes[d.curso]||d.curso||"—";
+    document.getElementById("n").textContent = (d.nota??"—")+"%";
+    document.getElementById("nm").textContent = d.nome||"—";
+    document.getElementById("cp").textContent = d.cpf||"—";
+    document.getElementById("dt").textContent = d.data||"—";
+    document.getElementById("v").textContent = d.ver||"—";
   }catch(e){ alert("Não encontrei dados da avaliação. Volte e envie a prova novamente."); }
 })();
 </script>
