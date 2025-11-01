@@ -12,8 +12,6 @@
  .q h3{font-size:16px;margin:0 0 8px}
  .opts label{display:block;margin:6px 0;cursor:pointer}
  .btn{background:#2563eb;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:600;cursor:pointer}
- .btn.secondary{background:#0891b2}
- .btn:disabled{opacity:.6;cursor:not-allowed}
  .msg{margin:12px 0;color:#f87171}.ok{color:#34d399}
 </style>
 </head><body>
@@ -31,10 +29,7 @@
     </label>
   </div>
   <div id="quiz"></div>
-  <div class="row" style="margin-top:18px">
-    <button id="enviar" class="btn">Enviar respostas</button>
-    <button id="btnComprovante" class="btn secondary" style="display:none">Baixar comprovante</button>
-  </div>
+  <div class="row" style="margin-top:18px"><button id="enviar" class="btn">Enviar respostas</button></div>
   <div id="msg" class="msg"></div>
 </div></div>
 
@@ -68,7 +63,6 @@
   const p=new URLSearchParams(location.search);
   const curso=(p.get("curso")||"nr1").toLowerCase().replace(/[^a-z0-9]/g,"");
   const today=new Date(); $("#data").value=today.toISOString().slice(0,10);
-  const btnComp=$("#btnComprovante");
   const msg=(t,ok=false)=>{const m=$("#msg"); m.textContent=t; m.className= ok?"msg ok":"msg";};
 
   function get10(base){
@@ -80,20 +74,20 @@
   function render(qs){
     const host=$("#quiz"); host.innerHTML="";
     qs.forEach((it,idx)=>{
-      const qid=\`q\${idx+1}\`;
+      const qid=`q${idx+1}`;
       const b=document.createElement("div");
       b.className="q";
-      b.innerHTML=\`<h3>\${idx+1}. \${it.q}</h3>
+      b.innerHTML=`<h3>${idx+1}. ${it.q}</h3>
       <div class="opts">
-        \${["a","b","c","d"].map(k=>\`<label><input type="radio" name="\${qid}" value="\${k}"> \${it[k]}</label>\`).join("")}
-      </div>\`;
+        ${["a","b","c","d"].map(k=>`<label><input type="radio" name="${qid}" value="${k}"> ${it[k]}</label>`).join("")}
+      </div>`;
       host.appendChild(b);
     });
   }
 
   function grade(qs){
-    let ok=0; qs.forEach((it,idx)=>{ const sel=document.querySelector(\`input[name="q\${idx+1}"]:checked\`); if(sel&&sel.value===it.ans) ok++;});
-    const nota=Math.round((ok/10)*100); $("#score").textContent=\`Nota: \${nota} | Acertos: \${ok}/10\`; return nota;
+    let ok=0; qs.forEach((it,idx)=>{ const sel=document.querySelector(`input[name="q${idx+1}"]:checked`); if(sel&&sel.value===it.ans) ok++;});
+    const nota=Math.round((ok/10)*100); $("#score").textContent=`Nota: ${nota} | Acertos: ${ok}/10`; return nota;
   }
 
   const base=QUESTIONS[curso]||[];
@@ -101,28 +95,7 @@
   if(!qs.length){ msg("Curso inválido. Use ?curso=nr1,nr5,nr6,nr10,nr20,nr33,nr35."); document.getElementById("enviar").disabled=true; }
   else { render(qs); msg("Carregado. Responda e envie.",true); }
 
-  function hash(s){let h=0; for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i); h|=0;} return (h>>>0).toString(16); }
-
-  document.getElementById("enviar").onclick=()=>{
-    const nota=grade(qs);
-    const nome=($("#nome").value||"").trim();
-    const cpf=($("#cpf").value||"").trim();
-    const email=($("#email").value||"").trim();
-    const data=($("#data").value||"").trim();
-    if(!nome || !cpf || !data){ alert("Preencha Nome, CPF e Data."); return; }
-
-    const payload={curso, nome, cpf, email, data, nota, ver: hash(curso+nome+cpf+data+nota)};
-    localStorage.setItem("cert_dados", JSON.stringify(payload));
-
-    if(nota>=70){
-      btnComp.style.display="inline-block";
-      btnComp.onclick=()=>{ location.href="comprovante.html"; };
-      alert("Respostas enviadas. Nota: "+nota+"%. Você pode baixar o comprovante.");
-    }else{
-      btnComp.style.display="none";
-      alert("Respostas enviadas. Nota: "+nota+"% (necessário ≥ 70%).");
-    }
-  };
+  document.getElementById("enviar").onclick=()=>{ const n=grade(qs); alert("Respostas enviadas. Nota: "+n+"%"); };
 })();
 </script>
 </body></html>
