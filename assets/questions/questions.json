@@ -3,5 +3,29 @@
     {"q":"A NR-1 estabelece disposições gerais de SST. Qual documento integra o GRO?","a":"PCMSO","b":"PPRA","c":"PGR","d":"PPP","ans":"c"},
     {"q":"O PGR é composto por quais elementos principais?","a":"Relatório financeiro e PCMSO","b":"Inventário de riscos e plano de ação","c":"CIPA e PPP","d":"SIPAT e atas","ans":"b"},
     {"q":"Qual o foco do GRO?","a":"Gestão de riscos ocupacionais","b":"Gestão fiscal","c":"Gestão de RH","d":"Gestão de TI","ans":"a"}
+  ],
+  "nr5": [
+    {"q":"Qual é o principal objetivo da CIPA?","a":"Garantir férias aos trabalhadores","b":"Promover a segurança e saúde no trabalho","c":"Fiscalizar salários","d":"Emitir PPP","ans":"b"},
+    {"q":"Qual norma regulamenta a CIPA?","a":"NR-6","b":"NR-33","c":"NR-5","d":"NR-10","ans":"c"}
+  ],
+  "nr6": [
+    {"q":"O que são EPIs?","a":"Equipamentos de proteção individual","b":"Equipamentos públicos de infraestrutura","c":"Elementos de proteção integrada","d":"Equipamentos de produção industrial","ans":"a"},
+    {"q":"Quem é responsável por fornecer EPI?","a":"Empregado","b":"Empregador","c":"Governo","d":"CIPA","ans":"b"}
+  ],
+  "nr10": [
+    {"q":"A NR-10 trata de que tema?","a":"Trabalho em altura","b":"Espaço confinado","c":"Segurança em instalações elétricas","d":"Explosivos","ans":"c"},
+    {"q":"Qual é a tensão mínima considerada em serviços elétricos para aplicação da NR-10?","a":"50V","b":"220V","c":"380V","d":"440V","ans":"a"}
+  ],
+  "nr20": [
+    {"q":"A NR-20 trata de que tema?","a":"Inflamáveis e combustíveis","b":"Eletricidade","c":"Altura","d":"Ruído","ans":"a"},
+    {"q":"O que deve conter no plano de resposta a emergências?","a":"Procedimentos e contatos de emergência","b":"Lista de EPIs","c":"Registros de ponto","d":"Agenda de férias","ans":"a"}
+  ],
+  "nr33": [
+    {"q":"A NR-33 trata de quê?","a":"Trabalho em altura","b":"Espaços confinados","c":"Eletricidade","d":"Ergonomia","ans":"b"},
+    {"q":"Quem pode entrar em um espaço confinado?","a":"Qualquer trabalhador","b":"Somente treinado e autorizado","c":"Visitantes","d":"Motoristas","ans":"b"}
+  ],
+  "nr35": [
+    {"q":"A NR-35 trata de que tipo de atividade?","a":"Trabalho em espaço confinado","b":"Trabalho em altura","c":"Trabalho com inflamáveis","d":"Trabalho administrativo","ans":"b"},
+    {"q":"Qual a altura mínima para caracterizar trabalho em altura segundo a NR-35?","a":"1 metro","b":"1,5 metro","c":"2 metros","d":"3 metros","ans":"c"}
   ]
 }
