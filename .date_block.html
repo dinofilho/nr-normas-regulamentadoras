@@ -10,8 +10,13 @@
   if(!d) return;
   var t=new Date(), y=t.getFullYear(), m=("0"+(t.getMonth()+1)).slice(-2), da=("0"+t.getDate()).slice(-2);
   d.value = y+"-"+m+"-"+da;
-  function sync(){ var v=d.value||y+"-"+m+"-"+da; var p=v.split("-"); var data=p[2]+"/"+p[1]+"/"+p[0];
-    var hora=new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}); if(h) h.value=data+" - "+hora; }
-  sync(); d.addEventListener("change",sync,true); if(d.form){ d.form.addEventListener("submit",sync,true); }
+  function sync(){
+    var v=d.value||y+"-"+m+"-"+da, p=v.split("-");
+    var data=p[2]+"/"+p[1]+"/"+p[0];
+    var hora=new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+    if(h) h.value=data+" - "+hora;
+  }
+  sync(); d.addEventListener("change",sync,true);
+  if(d.form){ d.form.addEventListener("submit",sync,true); }
 })();
 </script>
