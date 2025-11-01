@@ -2,12 +2,25 @@
   <label for="dataAvaliacao" class="block text-sm font-medium mb-1">Data da avaliação</label>
   <input type="date" id="dataAvaliacao" name="dataAvaliacao" class="border rounded px-3 py-2 w-full" />
 </div>
+<input type="hidden" id="dataEnvio" name="dataEnvio" />
 <script>
   (function(){
-    var d = document.getElementById("dataAvaliacao");
-    if(!d){ return; }
-    var t = new Date();
-    var y=t.getFullYear(), m=("0"+(t.getMonth()+1)).slice(-2), da=("0"+t.getDate()).slice(-2);
-    d.value = y+"-"+m+"-"+da;
+    try{
+      var d = document.getElementById("dataAvaliacao");
+      var h = document.getElementById("dataEnvio");
+      if(!d){return;}
+      // preenche com a data de hoje (yyyy-mm-dd)
+      var t=new Date(), y=t.getFullYear(), m=("0"+(t.getMonth()+1)).slice(-2), da=("0"+t.getDate()).slice(-2);
+      d.value = y+"-"+m+"-"+da;
+      function syncHidden(){
+        var v = d.value || (y+"-"+m+"-"+da);
+        var p=v.split("-"); var data = p[2]+"/"+p[1]+"/"+p[0];
+        var hora = new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+        if(h) h.value = data+" - "+hora;
+      }
+      syncHidden();
+      d.addEventListener("change", syncHidden, true);
+      if(d.form){ d.form.addEventListener("submit", syncHidden, true); }
+    }catch(e){}
   })();
 </script>
