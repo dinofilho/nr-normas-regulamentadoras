@@ -2,54 +2,32 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Avaliação Teórica</title>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:#f8fafc;margin:0}
-  .wrap{max-width:920px;margin:32px auto;padding:0 16px}
-  .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:20px}
-  h1{margin:0 0 16px;font-size:28px}
-  .row{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
-  .row input{flex:1 1 260px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px}
-  .q{border-top:1px dashed #e5e7eb;padding-top:14px;margin-top:14px}
-  .q h3{font-size:16px;margin:0 0 8px}
-  .opts label{display:block;margin:6px 0;cursor:pointer}
-  .btn{background:#2563eb;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:600;cursor:pointer}
-  .btn:disabled{opacity:.6;cursor:not-allowed}
-  .msg{margin:12px 0;color:#b91c1c}
-  .ok{color:#065f46}
+ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',sans-serif;background:#0f172a;color:#e5e7eb;margin:0}
+ .wrap{max-width:920px;margin:28px auto;padding:0 16px}
+ .card{background:#0b1220;border:1px solid #1f2937;border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.4);padding:20px}
+ h1{margin:0 0 8px;font-size:26px}
+ .row{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+ .row input{flex:1 1 240px;padding:10px 12px;border:1px solid #334155;border-radius:10px;background:#0f172a;color:#e5e7eb}
+ .q{border-top:1px dashed #334155;padding-top:14px;margin-top:14px}
+ .q h3{font-size:16px;margin:0 0 8px}
+ .opts label{display:block;margin:6px 0;cursor:pointer}
+ .btn{background:#2563eb;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:600;cursor:pointer}
+ .btn:disabled{opacity:.6;cursor:not-allowed}
+ .msg{margin:12px 0;color:#f87171}.ok{color:#34d399}
 </style>
-  <script src="auto-grade.js" defer></script>
 </head><body>
 <div class="wrap"><div class="card">
-  <h1>Avaliação Teórica</h1><div id="placar-nota" style="margin:16px 0;font-weight:600;"></div>
-<input type="hidden" id="nota" name="nota">
-
-  <div id="cursoInfo" class="row"></div>
+  <h1>Avaliação Teórica</h1>
+  <div id="score" style="margin:4px 0 8px 0;">Nota: 0 | Acertos: 0/10</div>
   <div class="row">
     <input id="nome" placeholder="Nome completo">
     <input id="cpf" placeholder="CPF (000.000.000-00)">
-    <input id="email" placeholder="(opcional) e-mail"><div class="mt-3">
-  <label for="dataAvaliacao" class="block text-sm font-medium mb-1">Data da avaliação</label>
-  <input type="date" id="dataAvaliacao" name="dataAvaliacao" class="border rounded px-3 py-2 w-full">
-</div>
-<input type="hidden" id="dataEnvio" name="dataEnvio">
-<script>
-  (function () {
-    var d = document.getElementById('dataAvaliacao');
-    var h = document.getElementById('dataEnvio');
-    if (!d) return;
-    var t = new Date(), y = t.getFullYear(), m = String(t.getMonth()+1).padStart(2,'0'), da = String(t.getDate()).padStart(2,'0');
-    d.value = y + '-' + m + '-' + da;
-    function sync(){
-      var v = d.value || (y+'-'+m+'-'+da);
-      var p = v.split('-'); var data = p[2]+'/'+p[1]+'/'+p[0];
-      var hora = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
-      if (h) h.value = data + ' - ' + hora;
-    }
-    sync();
-    d.addEventListener('change', sync, true);
-    if (d.form) d.form.addEventListener('submit', sync, true);
-  })();
-</script>
-
+    <input id="email" placeholder="(opcional) e-mail">
+  </div>
+  <div class="row">
+    <label style="width:100%">Data da avaliação
+      <input id="data" type="date" style="width:100%">
+    </label>
   </div>
   <div id="quiz"></div>
   <div class="row" style="margin-top:18px"><button id="enviar" class="btn">Enviar respostas</button></div>
@@ -58,152 +36,92 @@
 
 <script>
 (function(){
-  const $ = (s)=>document.querySelector(s);
-  const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className = ok?"msg ok":"msg"; };
+  const QUESTIONS = {
+    nr1: [
+      {q:"Qual documento integra o GRO segundo a NR-1?",a:"PCMSO",b:"PPRA",c:"PGR",d:"PPP",ans:"c"},
+      {q:"O PGR é composto por:",a:"Relatório financeiro e PCMSO",b:"Inventário de riscos e plano de ação",c:"CIPA e PPP",d:"SIPAT e atas",ans:"b"},
+      {q:"O foco do GRO é:",a:"Gestão de riscos ocupacionais",b:"Gestão fiscal",c:"Gestão de RH",d:"TI",ans:"a"}
+    ],
+    nr5: [
+      {q:"Objetivo da CIPA (NR-5):",a:"Férias",b:"Promover SST",c:"Salários",d:"Emitir PPP",ans:"b"},
+      {q:"Atribuição da CIPA:",a:"Comprar EPI",b:"Plano de trabalho de SST",c:"Pagar adicionais",d:"Emitir CAT",ans:"b"},
+      {q:"Treinamento da CIPA é:",a:"Dispensável",b:"Obrigatório",c:"Só suplentes",d:"Só presidente",ans:"b"}
+    ],
+    nr6: [
+      {q:"EPI significa:",a:"Equipamento de Proteção Individual",b:"Equipe de Planejamento",c:"Estudo Perigo",d:"Escala Produção",ans:"a"},
+      {q:"Quem fornece EPI:",a:"Empregado",b:"Empregador",c:"Governo",d:"CIPA",ans:"b"},
+      {q:"EPI deve ter:",a:"CA válido",b:"Etiqueta",c:"Manual opcional",d:"Nada",ans:"a"}
+    ],
+    nr10: [
+      {q:"Tema da NR-10:",a:"Altura",b:"Confinado",c:"Segurança em eletricidade",d:"Ergonomia",ans:"c"},
+      {q:"Treinamento básico mínimo:",a:"8h",b:"16h",c:"40h",d:"100h",ans:"c"},
+      {q:"Documentação exigida:",a:"Prontuário das instalações",b:"Livro ponto",c:"Ata CIPA",d:"—",ans:"a"}
+    ],
+    nr20: [
+      {q:"Tema da NR-20:",a:"Inflamáveis e combustíveis",b:"Ruído",c:"Ergonomia",d:"Eletricidade",ans:"a"},
+      {q:"Plano essencial:",a:"Resposta a emergências",b:"Férias",c:"PPP",d:"Livro-caixa",ans:"a"},
+      {q:"Inventário da NR-20 deve:",a:"Ser ignorado",b:"Identificar perigos e controles",c:"Só EPIs",d:"Ergonomia",ans:"b"}
+    ],
+    nr33: [
+      {q:"Tema da NR-33:",a:"Altura",b:"Espaços confinados",c:"Máquinas",d:"Calor",ans:"b"},
+      {q:"Acesso ao confinado:",a:"Qualquer um",b:"Treinado e autorizado",c:"Visitante",d:"Terceiro sem EPI",ans:"b"},
+      {q:"Documento de entrada:",a:"PET",b:"Recibo",c:"Atestado",d:"Nota fiscal",ans:"a"}
+    ],
+    nr35: [
+      {q:"Tema da NR-35:",a:"Altura",b:"Eletricidade",c:"Explosivos",d:"Máquinas",ans:"a"},
+      {q:"Altura mínima (NR-35):",a:"1,0 m",b:"1,5 m",c:"2,0 m",d:"3,0 m",ans:"c"},
+      {q:"Antes do trabalho em altura:",a:"Nada",b:"AR, planejamento e sistema de proteção",c:"Só cinto",d:"Só escada",ans:"b"}
+    ]
+  };
+
+  const $ = s => document.querySelector(s);
   const params = new URLSearchParams(location.search);
-  const raw = (params.get("curso")||"nr1").toLowerCase();
-  const curso = raw.replace(/[^a-z0-9]/g,""); // "nr-33" -> "nr33"
-  const human = "NR-" + curso.replace("nr","");
+  const curso = (params.get("curso")||"nr1").toLowerCase().replace(/[^a-z0-9]/g,"");
+  const today = new Date(); $("#data").value = today.toISOString().slice(0,10);
+  const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className= ok? "msg ok" : "msg"; };
 
-  $("#cursoInfo").innerHTML = '<input value="'+human+'" disabled>';
-
-  function normalizeQuestionsContainer(data){
-    if(Array.isArray(data)) return data;
-    const pickKeys=(obj, keys)=>keys.map(k=>obj?.[k]).find(v=>Array.isArray(v)&&v.length);
-    let arr = pickKeys(data||{}, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
-    if(arr) return arr;
-    const q = data && (data.questions || data.qs || data.items);
-    if(q && typeof q==="object"){
-      arr = pickKeys(q, [curso, curso.toUpperCase(), "nr-"+curso.slice(2), ("NR-"+curso.slice(2))]);
-      if(arr) return arr;
-      // tenta por nome normalizado
-      for(const k of Object.keys(q)){
-        if(Array.isArray(q[k]) && k.toLowerCase().replace(/[^a-z0-9]/g,"")===curso) return q[k];
-      }
+  function getQuestions(){
+    const base = QUESTIONS[curso] || [];
+    if(!base.length) return [];
+    const out = [];
+    for(let i=0;i<10;i++){
+      const src = base[i % base.length];
+      out.push(i<base.length ? src : {...src, q: src.q+" (var "+(i+1)+")"});
     }
-    // último recurso: percorre chaves de primeiro nível
-    if(data && typeof data==="object"){
-      for(const k of Object.keys(data)){
-        if(Array.isArray(data[k]) && k.toLowerCase().replace(/[^a-z0-9]/g,"")===curso) return data[k];
-      }
-    }
-    return [];
+    return out;
   }
 
-  // --- CANONIZA UMA QUESTÃO --- //
-  function canon(it){
-    const clean = (v)=> (v==null ? "" : String(v)).trim();
-    const isBad = (v)=> !v || /^\s*$/.test(v) || /^\s*1\s*$/.test(v); // "1" de placeholder
-    const q = clean(it.q || it.question || it.pergunta || "");
-    let a = clean(it.a), b = clean(it.b), c = clean(it.c), d = clean(it.d);
-
-    // Se veio options: [...]
-    if((!a && !b && !c && !d) && Array.isArray(it.options)){
-      [a,b,c,d] = (it.options.map(clean).concat(["","", "", ""])).slice(0,4);
-    }
-
-    // Se só A tem tudo colado por vírgula e B/C/D vazias/“1”, divide A
-    if(!isBad(a) && (isBad(b)&&isBad(c)&&isBad(d)) && a.includes(",")){
-      const parts = a.split(",").map(s=>s.trim()).filter(Boolean);
-      [a,b,c,d] = (parts.concat(["","", "", ""])).slice(0,4);
-    }
-
-    // Garante 4 alternativas
-    a = a || "—"; b = b || "—"; c = c || "—"; d = d || "—";
-
-    // Normaliza resposta
-    let ans = it.ans ?? it.answer ?? it.correct ?? it.resp ?? it.certa;
-    if(typeof ans === "number"){ ans = ['a','b','c','d'][Math.max(0, Math.min(3, ans>0?ans-1:ans))]; }
-    if(typeof ans === "string"){
-      let s = ans.trim().toLowerCase();
-      if(/^[abcd]$/.test(s)) { /* ok */ }
-      else if(/^[1234]$/.test(s)) { ans = ['a','b','c','d'][parseInt(s,10)-1]; }
-      else if(/^[0-3]$/.test(s)) { ans = ['a','b','c','d'][parseInt(s,10)]; }
-      else {
-        // tenta casar pelo texto da alternativa
-        const map = {a,b,c,d};
-        for(const k of ['a','b','c','d']){
-          if(map[k].toLowerCase()===s) { ans = k; break; }
-        }
-      }
-    }
-    if(!/^[abcd]$/.test(String(ans))) ans = 'a'; // fallback seguro
-
-    return { q, a, b, c, d, ans };
-  }
-
-  async function loadQuestions(){
-    const urls = [
-      `assets/questions/${curso}.json`,
-      `assets/questions/nr-${curso.slice(2)}.json`,
-      'assets/questions/questions.json'
-    ];
-    for(const u of urls){
-      try{
-        const r = await fetch(u, {cache:'no-store'});
-        if(!r.ok) continue;
-        const j = await r.json();
-        const arr = normalizeQuestionsContainer(j);
-        if(arr && arr.length) return arr.map(canon);
-      }catch(e){}
-    }
-    return [];
-  }
-
-  function render(questions){
-    const host = $("#quiz");
-    host.innerHTML = "";
-    questions.forEach((it,idx)=>{
+  function render(qs){
+    const host = $("#quiz"); host.innerHTML="";
+    qs.forEach((it,idx)=>{
       const qid = `q${idx+1}`;
-      const block = document.createElement("div");
-      block.className = "q";
-      block.innerHTML = `
+      const b = document.createElement("div");
+      b.className="q";
+      b.innerHTML = `
         <h3>${idx+1}. ${it.q}</h3>
         <div class="opts">
-          ${['a','b','c','d'].map(k=>{
-            const label = it[k] ?? '';
-            return `<label><input type="radio" name="${qid}" value="${k}"> ${label}</label>`;
-          }).join('')}
+          ${["a","b","c","d"].map(k=>`<label><input type="radio" name="${qid}" value="${k}"> ${it[k]}</label>`).join("")}
         </div>`;
-      host.appendChild(block);
+      host.appendChild(b);
     });
   }
 
-  function nota(questions){
+  function grade(qs){
     let ok=0;
-    questions.forEach((it,idx)=>{
-      const sel = document.querySelector(`input[name="q${idx+1}"]:checked`);
-      if(sel && sel.value === it.ans) ok++;
+    qs.forEach((it,idx)=>{
+      const sel = document.querySelector(\`input[name="q\${idx+1}"]:checked\`);
+      if(sel && sel.value===it.ans) ok++;
     });
-    return Math.round((ok/questions.length)*100);
+    const nota = Math.round((ok/10)*100);
+    $("#score").textContent = \`Nota: \${nota} | Acertos: \${ok}/10\`;
+    return nota;
   }
 
-  function comprovante(curso,nome,cpf,email,score){
-    const url = new URL('comprovante.html', location.href);
-    url.searchParams.set('curso', curso.toUpperCase());
-    url.searchParams.set('nome', nome);
-    url.searchParams.set('cpf', cpf);
-    url.searchParams.set('nota', String(score));
-    if(email) url.searchParams.set('email', email);
-    location.href = url.toString();
-  }
+  const qs = getQuestions();
+  if(!qs.length){ msg("Curso inválido ou sem questões. Use ?curso=nr1, nr5, nr6, nr10, nr20, nr33, nr35."); $("#enviar").disabled=true; }
+  else { render(qs); msg("Carregado. Responda e envie.", true); }
 
-  loadQuestions().then(qts=>{
-    if(!qts.length){
-      msg('Não foi possível carregar as questões deste curso (nenhuma questão encontrada).');
-      $("#enviar").disabled = true;
-      return;
-    }
-    render(qts); msg('Carregado. Responda e envie.', true);
-    $("#enviar").onclick = ()=>{
-      const nome=$("#nome").value.trim(), cpf=$("#cpf").value.trim(), email=$("#email").value.trim();
-      if(!nome || !cpf){ msg('Preencha Nome e CPF para continuar.'); return; }
-      const score = nota(qts);
-      comprovante(curso, nome, cpf, email, score);
-    };
-  });
-})();<script src="auto-grade.js" defer></script>
-
+  $("#enviar").onclick = ()=>{ const n = grade(qs); alert("Respostas enviadas. Nota: "+n+"%"); };
+})();
 </script>
-<script src="/nr-normas-regulamentadoras/inject-date.js" defer></script>
 </body></html>
