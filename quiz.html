@@ -42,6 +42,26 @@
       {q:"O PGR é composto por:",a:"Relatório financeiro e PCMSO",b:"Inventário de riscos e plano de ação",c:"CIPA e PPP",d:"SIPAT e atas",ans:"b"},
       {q:"O foco do GRO é:",a:"Gestão de riscos ocupacionais",b:"Gestão fiscal",c:"Gestão de RH",d:"TI",ans:"a"}
     ],
+    nr20: [
+      {q:"Tema da NR-20:",a:"Inflamáveis e combustíveis",b:"Ruído",c:"Ergonomia",d:"Eletricidade",ans:"a"},
+      {q:"Plano essencial:",a:"Resposta a emergências",b:"Férias",c:"PPP",d:"Livro-caixa",ans:"a"},
+      {q:"Inventário da NR-20 deve:",a:"Ser ignorado",b:"Identificar perigos e controles",c:"Só EPIs",d:"Ergonomia",ans:"b"}
+    ],
+    nr35: [
+      {q:"Tema da NR-35:",a:"Altura",b:"Eletricidade",c:"Explosivos",d:"Máquinas",ans:"a"},
+      {q:"Altura mínima (NR-35):",a:"1,0 m",b:"1,5 m",c:"2,0 m",d:"3,0 m",ans:"c"},
+      {q:"Antes do trabalho em altura:",a:"Nada",b:"AR, planejamento e sistema de proteção",c:"Só cinto",d:"Só escada",ans:"b"}
+    ],
+    nr33: [
+      {q:"Tema da NR-33:",a:"Altura",b:"Espaços confinados",c:"Máquinas",d:"Calor",ans:"b"},
+      {q:"Acesso ao confinado:",a:"Qualquer um",b:"Treinado e autorizado",c:"Visitante",d:"Terceiro sem EPI",ans:"b"},
+      {q:"Documento de entrada:",a:"PET",b:"Recibo",c:"Atestado",d:"Nota fiscal",ans:"a"}
+    ],
+    nr10: [
+      {q:"Tema da NR-10:",a:"Altura",b:"Confinado",c:"Segurança em eletricidade",d:"Ergonomia",ans:"c"},
+      {q:"Treinamento básico mínimo:",a:"8h",b:"16h",c:"40h",d:"100h",ans:"c"},
+      {q:"Documentação exigida:",a:"Prontuário das instalações",b:"Livro ponto",c:"Ata CIPA",d:"—",ans:"a"}
+    ],
     nr5: [
       {q:"Objetivo da CIPA (NR-5):",a:"Férias",b:"Promover SST",c:"Salários",d:"Emitir PPP",ans:"b"},
       {q:"Atribuição da CIPA:",a:"Comprar EPI",b:"Plano de trabalho de SST",c:"Pagar adicionais",d:"Emitir CAT",ans:"b"},
@@ -51,37 +71,17 @@
       {q:"EPI significa:",a:"Equipamento de Proteção Individual",b:"Equipe de Planejamento",c:"Estudo Perigo",d:"Escala Produção",ans:"a"},
       {q:"Quem fornece EPI:",a:"Empregado",b:"Empregador",c:"Governo",d:"CIPA",ans:"b"},
       {q:"EPI deve ter:",a:"CA válido",b:"Etiqueta",c:"Manual opcional",d:"Nada",ans:"a"}
-    ],
-    nr10: [
-      {q:"Tema da NR-10:",a:"Altura",b:"Confinado",c:"Segurança em eletricidade",d:"Ergonomia",ans:"c"},
-      {q:"Treinamento básico mínimo:",a:"8h",b:"16h",c:"40h",d:"100h",ans:"c"},
-      {q:"Documentação exigida:",a:"Prontuário das instalações",b:"Livro ponto",c:"Ata CIPA",d:"—",ans:"a"}
-    ],
-    nr20: [
-      {q:"Tema da NR-20:",a:"Inflamáveis e combustíveis",b:"Ruído",c:"Ergonomia",d:"Eletricidade",ans:"a"},
-      {q:"Plano essencial:",a:"Resposta a emergências",b:"Férias",c:"PPP",d:"Livro-caixa",ans:"a"},
-      {q:"Inventário da NR-20 deve:",a:"Ser ignorado",b:"Identificar perigos e controles",c:"Só EPIs",d:"Ergonomia",ans:"b"}
-    ],
-    nr33: [
-      {q:"Tema da NR-33:",a:"Altura",b:"Espaços confinados",c:"Máquinas",d:"Calor",ans:"b"},
-      {q:"Acesso ao confinado:",a:"Qualquer um",b:"Treinado e autorizado",c:"Visitante",d:"Terceiro sem EPI",ans:"b"},
-      {q:"Documento de entrada:",a:"PET",b:"Recibo",c:"Atestado",d:"Nota fiscal",ans:"a"}
-    ],
-    nr35: [
-      {q:"Tema da NR-35:",a:"Altura",b:"Eletricidade",c:"Explosivos",d:"Máquinas",ans:"a"},
-      {q:"Altura mínima (NR-35):",a:"1,0 m",b:"1,5 m",c:"2,0 m",d:"3,0 m",ans:"c"},
-      {q:"Antes do trabalho em altura:",a:"Nada",b:"AR, planejamento e sistema de proteção",c:"Só cinto",d:"Só escada",ans:"b"}
     ]
   };
 
   const $ = s => document.querySelector(s);
   const params = new URLSearchParams(location.search);
-  const curso = (params.get("curso")||"nr1").toLowerCase().replace(/[^a-z0-9]/g,"");
+  const cod = (params.get("curso")||"nr1").toLowerCase();
   const today = new Date(); $("#data").value = today.toISOString().slice(0,10);
   const msg = (t,ok=false)=>{ const m=$("#msg"); m.textContent=t; m.className= ok? "msg ok" : "msg"; };
 
   function getQuestions(){
-    const base = QUESTIONS[curso] || [];
+    const base = QUESTIONS[cod] || [];
     if(!base.length) return [];
     const out = [];
     for(let i=0;i<10;i++){
@@ -118,7 +118,7 @@
   }
 
   const qs = getQuestions();
-  if(!qs.length){ msg("Curso inválido ou sem questões. Use ?curso=nr1, nr5, nr6, nr10, nr20, nr33, nr35."); $("#enviar").disabled=true; }
+  if(!qs.length){ msg("Curso inválido ou sem questões. Use ?curso=nr1,nr5,nr6,nr10,nr20,nr33,nr35."); $("#enviar").disabled=true; }
   else { render(qs); msg("Carregado. Responda e envie.", true); }
 
   $("#enviar").onclick = ()=>{ const n = grade(qs); alert("Respostas enviadas. Nota: "+n+"%"); };
