@@ -1,0 +1,13 @@
+<div class="mt-3">
+  <label for="dataAvaliacao" class="block text-sm font-medium mb-1">Data da avaliação</label>
+  <input type="date" id="dataAvaliacao" name="dataAvaliacao" class="border rounded px-3 py-2 w-full" />
+</div>
+<script>
+  (function(){
+    var d = document.getElementById("dataAvaliacao");
+    if(!d){ return; }
+    var t = new Date();
+    var y=t.getFullYear(), m=("0"+(t.getMonth()+1)).slice(-2), da=("0"+t.getDate()).slice(-2);
+    d.value = y+"-"+m+"-"+da;
+  })();
+</script>
